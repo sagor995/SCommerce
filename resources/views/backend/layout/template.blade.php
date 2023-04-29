@@ -6,8 +6,9 @@
 
 <head>
     @include('backend.includes.header');
+    @yield('page-title')
     @include('backend.includes.css');
-
+    @yield('page-css')
 
 </head>
 
@@ -27,6 +28,7 @@
     <!--end wrapper-->
 
     @include('backend.includes.script');
+    @yield('body-script')
 
 </body>
 <!-- Mirrored from codervent.com/rukada/demo/vertical/dashboard-eCommerce.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Jan 2023 17:30:48 GMT -->
