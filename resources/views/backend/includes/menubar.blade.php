@@ -28,9 +28,9 @@
                 <div class="menu-title">Category</div>
             </a>
             <ul>
-                <li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Add New Category</a>
+                <li> <a href="{{route('category.create')}}"><i class="bx bx-right-arrow-alt"></i>Add New Category</a>
                 </li>
-                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Manage All Category</a>
+                <li> <a href="{{route('category.manage')}}"><i class="bx bx-right-arrow-alt"></i>Manage All Category</a>
                 </li>
             </ul>
         </li>

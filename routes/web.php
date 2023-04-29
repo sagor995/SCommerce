@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,13 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, "index"])->name('admin.dashboard');
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/manage', [CategoryController::class, "index"])->name('category.manage');
+        Route::get('/add', [CategoryController::class, "create"])->name('category.create');
+        Route::post('/store', [CategoryController::class, "store"])->name('category.store');
+        Route::get('/edit', [CategoryController::class, "edit"])->name('category.edit');
+        Route::post('/update', [CategoryController::class, "update"])->name('category.update');
+        Route::get('/destroy', [CategoryController::class, "destroy"])->name('category.destroy');
+    });
 });
