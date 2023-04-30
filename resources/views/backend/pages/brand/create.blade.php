@@ -14,7 +14,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <div>
-                    <h5 class="mb-0">Manage All Brands</h5>
+                    <h5 class="mb-0">Add New Brand</h5>
                 </div>
                 <div class="dropdown options ms-auto">
                     <div class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">

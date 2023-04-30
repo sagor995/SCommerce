@@ -15,7 +15,9 @@ class BrandController extends Controller
     public function index()
     {
         //
-        return view('backend.pages.brand.manage');
+        $brands = Brand::orderBy('name', 'asc')->get();
+
+        return view('backend.pages.brand.manage', compact('brands'));
     }
 
     /**
@@ -38,7 +40,8 @@ class BrandController extends Controller
         $brand->slug = Str::slug($request->name);
         $brand->status = $request->status;
         $brand->description = $request->description;
-
+        //dd($brand);
+        //exit();
         $brand->save();
         return redirect()->route('brand.manage');
     }
