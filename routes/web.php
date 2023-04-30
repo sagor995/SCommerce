@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 //FrontEnd
+use App\Http\Controllers\Frontend\PagesController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,11 @@ use App\Http\Controllers\Backend\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [PagesController::class, "index"])->name('homepage');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +41,16 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, "index"])->name('admin.dashboard');
 
-    Route::group(['prefix' => 'category'], function () {
+    Route::group(['prefix' => '/brand'], function () {
+        Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
+        Route::get('/add', [BrandController::class, "create"])->name('brand.create');
+        Route::post('/store', [BrandController::class, "store"])->name('brand.store');
+        Route::get('/edit', [BrandController::class, "edit"])->name('brand.edit');
+        Route::post('/update', [BrandController::class, "update"])->name('brand.update');
+        Route::get('/destroy', [BrandController::class, "destroy"])->name('brand.destroy');
+    });
+
+    Route::group(['prefix' => '/category'], function () {
         Route::get('/manage', [CategoryController::class, "index"])->name('category.manage');
         Route::get('/add', [CategoryController::class, "create"])->name('category.create');
         Route::post('/store', [CategoryController::class, "store"])->name('category.store');

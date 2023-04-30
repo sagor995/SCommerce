@@ -25,6 +25,19 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
+                <div class="menu-title">Brand</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('brand.create')}}"><i class="bx bx-right-arrow-alt"></i>Add New Brand</a>
+                </li>
+                <li> <a href="{{route('brand.manage')}}"><i class="bx bx-right-arrow-alt"></i>Manage All Brand</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
                 <div class="menu-title">Category</div>
             </a>
             <ul>
@@ -34,6 +47,7 @@
                 </li>
             </ul>
         </li>
+
 
         <li class="menu-label">Order Management</li>
         <li>
