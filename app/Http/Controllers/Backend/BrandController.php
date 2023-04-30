@@ -39,8 +39,8 @@ class BrandController extends Controller
         $brand->status = $request->status;
         $brand->description = $request->description;
 
-        dd($brand);
-        exit();
+        $brand->save();
+        return redirect()->route('brand.manage');
     }
 
     /**
