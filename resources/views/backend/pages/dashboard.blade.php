@@ -791,3 +791,8 @@
     </div>
 </div>
 @endsection
+
+@section('body-script')
+<script src="{{asset('backend/assets/plugins/chartjs/chart.min.js')}}"></script>
+<script src="{{asset('backend/assets/plugins/peity/jquery.peity.min.js')}}"></script>
+@endsection

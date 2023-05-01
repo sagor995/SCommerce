@@ -25,7 +25,7 @@
         <div class="card-body">
             @if($brands->count()>0)
             <div class="table-responsive-sm">
-                <table class="table table-bordered table-striped" id="brand_table">
+                <table class="table table-bordered table-striped table-hover table-border" id="bdata_table">
                     <thead class="table-dark">
                         <tr>
                             <th>#Sr.</th>
@@ -105,13 +105,13 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#brand_table').DataTable({
+        var table = $('#bdata_table').DataTable({
             lengthChange: false,
             buttons: ['copy', 'excel', 'pdf', 'print']
         });
 
         table.buttons().container()
-            .appendTo('#brand_table_wrapper .col-md-6:eq(0)');
+            .appendTo('#bdata_table_wrapper .col-md-6:eq(0)');
     });
 </script>
 @endsection
