@@ -15,7 +15,7 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::orderBy('name', 'asc')->get();
+        $brands = Brand::orderBy('name', 'asc')->where('status', 1)->get();
 
         return view('backend.pages.brand.manage', compact('brands'));
     }
@@ -54,6 +54,7 @@ class BrandController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -88,6 +89,18 @@ class BrandController extends Controller
     }
 
     /**
+     * Display a listing of the trash.
+     */
+    public function trash()
+    {
+        //
+        $brands = Brand::orderBy('name', 'asc')->where('status', 0)->get();
+
+        return view('backend.pages.brand.trash', compact('brands'));
+    }
+
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
@@ -98,7 +111,11 @@ class BrandController extends Controller
             //Image Delete
 
             //Content Delete
-            $brand->delete();
+            //$brand->delete();
+
+            //Soft delete
+            $brand->status = 0;
+            $brand->save();
             return redirect()->route('brand.manage');
         } else {
             //404 Not found

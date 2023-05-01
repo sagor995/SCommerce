@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => '/brand'], function () {
         Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
+        Route::get('/trash', [BrandController::class, "trash"])->name('brand.trash');
         Route::get('/add', [BrandController::class, "create"])->name('brand.create');
         Route::post('/store', [BrandController::class, "store"])->name('brand.store');
         Route::get('/edit/{id}', [BrandController::class, "edit"])->name('brand.edit');

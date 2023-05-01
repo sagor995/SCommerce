@@ -18,7 +18,7 @@
                     <h5 class="mb-0">Manage All Brands</h5>
                 </div>
                 <div class="dropdown options ms-auto">
-                    <a href="{{route('brand.trash')}}"><span class="btn btn-primary btn-sm">View Trash</span></a>
+                    <a href="{{route('brand.manage')}}"><span class="btn btn-primary btn-sm">View Active Brands</span></a>
                 </div>
             </div>
         </div>
