@@ -5,7 +5,7 @@
 @endsection
 
 @section('body-css')
-
+<link href="{{asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 @endsection
 
 
@@ -25,7 +25,7 @@
         <div class="card-body">
             @if($brands->count()>0)
             <div class="table-responsive-sm">
-                <table class="table table-bordered ">
+                <table class="table table-bordered table-striped" id="tbrand_table">
                     <thead class="table-dark">
                         <tr>
                             <th>#Sr.</th>
@@ -102,4 +102,15 @@
 @section('body-script')
 <script src="{{asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#tbrand_table').DataTable({
+            lengthChange: false,
+            buttons: ['copy', 'excel', 'pdf', 'print']
+        });
+
+        table.buttons().container()
+            .appendTo('#tbrand_table_wrapper .col-md-6:eq(0)');
+    });
+</script>
 @endsection
