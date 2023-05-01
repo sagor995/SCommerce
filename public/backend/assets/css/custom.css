@@ -1,0 +1,17 @@
+.action-bar ul {
+    padding: 0;
+}
+
+.action-bar ul li {
+    list-style: none;
+    display: inline;
+    margin: 0 5px;
+}
+
+.action-bar ul li .lni-pencil-alt {
+    font-size: 16px;
+}
+
+.action-bar ul li .lni-trash {
+    font-size: 16px;
+}

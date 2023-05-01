@@ -59,7 +59,12 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if (!is_null($brand)) {
+            return view('backend.pages.brand.edit', compact('brand'));
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -67,7 +72,19 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if (!is_null($brand)) {
+            $brand->name = $request->name;
+            $brand->slug = Str::slug($request->name);
+            $brand->status = $request->status;
+            $brand->description = $request->description;
+            //dd($brand);
+            //exit();
+            $brand->save();
+            return redirect()->route('brand.manage');
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -76,5 +93,15 @@ class BrandController extends Controller
     public function destroy(string $id)
     {
         //
+        $brand = Brand::find($id);
+        if (!is_null($brand)) {
+            //Image Delete
+
+            //Content Delete
+            $brand->delete();
+            return redirect()->route('brand.manage');
+        } else {
+            //404 Not found
+        }
     }
 }

@@ -45,9 +45,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
         Route::get('/add', [BrandController::class, "create"])->name('brand.create');
         Route::post('/store', [BrandController::class, "store"])->name('brand.store');
-        Route::get('/edit', [BrandController::class, "edit"])->name('brand.edit');
-        Route::post('/update', [BrandController::class, "update"])->name('brand.update');
-        Route::get('/destroy', [BrandController::class, "destroy"])->name('brand.destroy');
+        Route::get('/edit/{id}', [BrandController::class, "edit"])->name('brand.edit');
+        Route::post('/update/{id}', [BrandController::class, "update"])->name('brand.update');
+        Route::post('/destroy/{id}', [BrandController::class, "destroy"])->name('brand.destroy');
     });
 
     Route::group(['prefix' => '/category'], function () {
