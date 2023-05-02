@@ -40,7 +40,13 @@
                         @foreach($brands as $brand)
                         <tr>
                             <td>{{$i;}}</td>
-                            <td>Image</td>
+                            <td>
+                                @if(!is_null($brand->image))
+                                <img src="{{asset('images/brand/'.$brand->image)}}" width="35px" />
+                                @else
+                                N/A
+                                @endif
+                            </td>
                             <td>{{$brand->name}}</td>
                             <td>
                                 @if($brand->status == 1)
