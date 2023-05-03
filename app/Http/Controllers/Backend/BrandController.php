@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use File;
+
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image as Image;
 
 class BrandController extends Controller
@@ -90,6 +91,20 @@ class BrandController extends Controller
             $brand->slug = Str::slug($request->name);
             $brand->status = $request->status;
             $brand->description = $request->description;
+
+            if ($request->image) {
+
+                if (File::exists('images/brand/' . $brand->image)) {
+                    File::delete('images/brand/' . $brand->image);
+                }
+
+                $image = $request->file('image');
+                $img = time() . '-br.' . $image->getClientOriginalExtension();
+                $location = public_path('images/brand/' . $img);
+                Image::make($image)->save($location);
+                $brand->image = $img;
+            }
+
             //dd($brand);
             //exit();
             $brand->save();
