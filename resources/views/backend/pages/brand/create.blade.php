@@ -1,7 +1,7 @@
 @extends('backend.layout.template')
 
 @section('page-title')
-<title>Add New Category | Ecommerce Platform</title>
+<title>Add New Brand | Ecommerce Platform</title>
 @endsection
 
 @section('body-css')

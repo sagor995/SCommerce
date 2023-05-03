@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image as Image;
 
 class CategoryController extends Controller
 {
@@ -13,7 +18,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view("backend.pages.category.manage");
+        $categories = Category::orderBy('name', 'asc')->where('status', 1)->get();
+
+        return view('backend.pages.category.manage', compact('categories'));
     }
 
     /**
@@ -22,7 +29,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view("backend.pages.category.create");
+        $parentCategories = Category::orderBy('name', 'asc')->where('is_parent', 0)->get();
+        return view("backend.pages.category.create", compact('parentCategories'));
     }
 
     /**
@@ -30,7 +38,25 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->status = $request->status;
+        $category->description = $request->description;
+
+        if ($request->image) {
+            $image = $request->file('image');
+            $img = time() . '-cat.' . $image->getClientOriginalExtension();
+            $location = public_path('images/category/' . $img);
+            Image::make($image)->save($location);
+            $category->image = $img;
+        }
+
+        //dd($category);
+        //exit();
+        $category->save();
+        return redirect()->route('category.manage');
     }
 
     /**
@@ -47,6 +73,13 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         //
+        $category = Category::find($id);
+        if (!is_null($category)) {
+            $parentCategories = Category::orderBy('name', 'asc')->where('is_parent', 0)->get();
+            return view('backend.pages.category.edit', compact('parentCategories', 'category'));
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -54,7 +87,44 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $category = Category::find($id);
+        if (!is_null($category)) {
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+            $category->status = $request->status;
+            $category->description = $request->description;
+
+            if ($request->image) {
+
+                if (File::exists('images/category/' . $category->image)) {
+                    File::delete('images/category/' . $category->image);
+                }
+
+                $image = $request->file('image');
+                $img = time() . '-br.' . $image->getClientOriginalExtension();
+                $location = public_path('images/category/' . $img);
+                Image::make($image)->save($location);
+                $category->image = $img;
+            }
+
+            //dd($category);
+            //exit();
+            $category->save();
+            return redirect()->route('category.manage');
+        } else {
+            //404 Not found
+        }
+    }
+
+    /**
+     * Display a listing of the trash.
+     */
+    public function trash()
+    {
         //
+        $categories = Category::orderBy('name', 'asc')->where('status', 0)->get();
+
+        return view('backend.pages.category.trash', compact('categories'));
     }
 
     /**
@@ -63,5 +133,19 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+        $category = Category::find($id);
+        if (!is_null($category)) {
+            //Image Delete
+
+            //Content Delete
+            //$category->delete();
+
+            //Soft delete
+            $category->status = 0;
+            $category->save();
+            return redirect()->route('category.manage');
+        } else {
+            //404 Not found
+        }
     }
 }

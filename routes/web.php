@@ -7,8 +7,9 @@ use App\Http\Controllers\Frontend\PagesController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +54,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => '/category'], function () {
         Route::get('/manage', [CategoryController::class, "index"])->name('category.manage');
+        Route::get('/trash', [CategoryController::class, "trash"])->name('category.trash');
         Route::get('/add', [CategoryController::class, "create"])->name('category.create');
         Route::post('/store', [CategoryController::class, "store"])->name('category.store');
-        Route::get('/edit', [CategoryController::class, "edit"])->name('category.edit');
-        Route::post('/update', [CategoryController::class, "update"])->name('category.update');
-        Route::get('/destroy', [CategoryController::class, "destroy"])->name('category.destroy');
+        Route::get('/edit/{id}', [CategoryController::class, "edit"])->name('category.edit');
+        Route::post('/update/{id}', [CategoryController::class, "update"])->name('category.update');
+        Route::post('/destroy/{id}', [CategoryController::class, "destroy"])->name('category.destroy');
     });
 });

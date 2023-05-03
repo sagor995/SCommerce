@@ -1,7 +1,7 @@
 @extends('backend.layout.template')
 
 @section('page-title')
-<title>Manage All Category | Ecommerce Platform</title>
+<title>Manage All Brands | Ecommerce Platform</title>
 @endsection
 
 @section('body-css')
