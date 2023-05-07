@@ -43,7 +43,8 @@
                             <select class="form-select mb-3" name="is_parent" aria-label="Default select example" required>
                                 <option value="0">Please select the parent category</option>
                                 @foreach($parentCategories as $pCat)
-                                <option value="{{$pCat->id}}">{{$pCat->name}}</option>
+                                <option value="{{$pCat->id}}" @if ($pCat->id == $category->is_parent) selected @endif
+                                    >{{$pCat->name}}</option>
                                 @endforeach
                             </select>
                         </div>

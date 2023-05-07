@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderBy('name', 'asc')->where('status', 1)->get();
+        $categories = Category::orderBy('name', 'asc')->where('status', 1)->where('is_parent', 0)->get();
 
         return view('backend.pages.category.manage', compact('categories'));
     }

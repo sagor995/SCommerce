@@ -38,6 +38,7 @@
                     </thead>
                     <tbody>
                         @php $i=1; @endphp
+                        <!-- For Parent Category -->
                         @foreach($categories as $category)
                         <tr>
                             <td>{{$i;}}</td>
@@ -99,6 +100,74 @@
                                     </div>
                                 </div>
                         </tr>
+
+                        <!-- For Child Category -->
+                        @foreach(App\Models\Category::orderBy('name','asc')->where('is_parent',$category->id)->where('status',1)->get() as $chCategory)
+
+                        @php $i++; @endphp
+
+                        <tr>
+                            <td>{{$i;}}</td>
+                            <td>
+                                @if(!is_null($chCategory->image))
+                                <img src="{{asset('images/category/'.$chCategory->image)}}" width="35px" />
+                                @else
+                                N/A
+                                @endif
+                            </td>
+                            <td>{{$chCategory->name}}</td>
+                            <td>
+                                @if($chCategory->is_parent == 0 )
+                                <span class="badge bg-info">Parent Category</span>
+                                @else
+                                --- {{$chCategory->parent->name}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($chCategory->status == 1)
+                                <span class="badge bg-primary">Active</span>
+                                @elseif($chCategory->status == 0)
+                                <span class="badge bg-warning">Inactive</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="action-bar">
+                                    <ul>
+                                        <li><a href="{{route('category.edit', $chCategory->id)}}"><i class="lni lni-pencil-alt text-success"></i></a></li>
+                                        <li><a href="" data-bs-toggle="modal" data-bs-target="#deleteCategory{{ $chCategory->id }}"><i class="lni lni-trash text-danger"></i></a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteCategory{{ $chCategory->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you really want to delete this Category?</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="action-bar">
+                                                <ul>
+                                                    <li>
+                                                        <form action="{{route('category.destroy',$chCategory->id)}}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </tr>
+                        @endforeach
+
                         @php $i++; @endphp
                         @endforeach
                     </tbody>
