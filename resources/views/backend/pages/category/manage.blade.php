@@ -52,6 +52,8 @@
                             <td>
                                 @if($category->is_parent == 0 )
                                 <span class="badge bg-info">Parent Category</span>
+                                @else
+                                {{$category->parent->name}}
                                 @endif
                             </td>
                             <td>

@@ -44,6 +44,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name);
         $category->status = $request->status;
         $category->description = $request->description;
+        $category->is_parent = $request->is_parent;
 
         if ($request->image) {
             $image = $request->file('image');
@@ -93,6 +94,7 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->name);
             $category->status = $request->status;
             $category->description = $request->description;
+            $category->is_parent = $request->is_parent;
 
             if ($request->image) {
 
