@@ -77,6 +77,34 @@
             </ul>
         </li>
 
+        <li class="menu-label">Location Management</li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="lni lni-map-marker"></i>
+                </div>
+                <div class="menu-title">Division</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('division.create')}}"><i class="bx bx-right-arrow-alt"></i>Add New Division</a>
+                </li>
+                <li> <a href="{{route('division.manage')}}"><i class="bx bx-right-arrow-alt"></i>Manage All Division</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="lni lni-map-marker"></i>
+                </div>
+                <div class="menu-title">District</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('district.create')}}"><i class="bx bx-right-arrow-alt"></i>Add New District</a>
+                </li>
+                <li> <a href="{{route('district.manage')}}"><i class="bx bx-right-arrow-alt"></i>Manage All District</a>
+                </li>
+            </ul>
+        </li>
+
         <li class="menu-label">Platform Settings</li>
         <li>
             <a href="javascript:;" class="has-arrow">

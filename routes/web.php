@@ -9,6 +9,8 @@ use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DivisionController;
+use App\Http\Controllers\Backend\DistrictController;
 
 
 /*
@@ -60,5 +62,25 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class, "edit"])->name('category.edit');
         Route::post('/update/{id}', [CategoryController::class, "update"])->name('category.update');
         Route::post('/destroy/{id}', [CategoryController::class, "destroy"])->name('category.destroy');
+    });
+
+    Route::group(['prefix' => '/division'], function () {
+        Route::get('/manage', [DivisionController::class, "index"])->name('division.manage');
+        Route::get('/trash', [DivisionController::class, "trash"])->name('division.trash');
+        Route::get('/add', [DivisionController::class, "create"])->name('division.create');
+        Route::post('/store', [DivisionController::class, "store"])->name('division.store');
+        Route::get('/edit/{id}', [DivisionController::class, "edit"])->name('division.edit');
+        Route::post('/update/{id}', [DivisionController::class, "update"])->name('division.update');
+        Route::post('/destroy/{id}', [DivisionController::class, "destroy"])->name('division.destroy');
+    });
+
+    Route::group(['prefix' => '/district'], function () {
+        Route::get('/manage', [DistrictController::class, "index"])->name('district.manage');
+        Route::get('/trash', [DistrictController::class, "trash"])->name('district.trash');
+        Route::get('/add', [DistrictController::class, "create"])->name('district.create');
+        Route::post('/store', [DistrictController::class, "store"])->name('district.store');
+        Route::get('/edit/{id}', [DistrictController::class, "edit"])->name('district.edit');
+        Route::post('/update/{id}', [DistrictController::class, "update"])->name('district.update');
+        Route::post('/destroy/{id}', [DistrictController::class, "destroy"])->name('district.destroy');
     });
 });
