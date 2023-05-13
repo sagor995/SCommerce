@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use App\Models\Division;
+use App\Models\District;
+
 
 class DistrictController extends Controller
 {
@@ -12,7 +17,18 @@ class DistrictController extends Controller
      */
     public function index()
     {
+        $districts = District::orderBy('name', 'asc')->where('status', 1)->get();
+        return view('backend.pages.district.manage', compact('districts'));
+    }
+
+    /**
+     * Display a listing of the trash resource.
+     */
+    public function trash()
+    {
         //
+        $districts = District::orderBy('name', 'asc')->where('status', 0)->get();
+        return view('backend.pages.district.manage', compact('districts'));
     }
 
     /**
@@ -20,7 +36,8 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        //
+        $divisions = Division::orderBy('priority_number', 'asc')->where('status', 1)->get();
+        return view('backend.pages.district.create', compact('divisions'));
     }
 
     /**
@@ -28,7 +45,16 @@ class DistrictController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $district                   = new District();
+        $district->name             = $request->name;
+        $district->slug             = Str::slug($request->name);
+        $district->division_id      = $request->division_id;
+        $district->status           = $request->status;
+
+        //dd($district);
+        //exit();
+        $district->save();
+        return redirect()->route('district.manage');
     }
 
     /**
@@ -44,7 +70,13 @@ class DistrictController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $district = District::find($id);
+        $divisions = Division::orderBy('priority_number', 'asc')->where('status', 1)->get();
+        if (!is_null($district)) {
+            return view('backend.pages.district.edit', compact('divisions', 'district'));
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -52,7 +84,21 @@ class DistrictController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $district = District::find($id);
+
+        if (!is_null($district)) {
+            $district->name             = $request->name;
+            $district->slug             = Str::slug($request->name);
+            $district->division_id      = $request->division_id;
+            $district->status           = $request->status;
+
+            //dd($district);
+            //exit();
+            $district->save();
+            return redirect()->route('district.manage');
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -60,6 +106,19 @@ class DistrictController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $district = District::find($id);
+        if (!is_null($district)) {
+            //Image Delete
+
+            //Content Delete
+            //$district->delete();
+
+            //Soft delete
+            $district->status = 0;
+            $district->save();
+            return redirect()->route('district.manage');
+        } else {
+            //404 Not found
+        }
     }
 }

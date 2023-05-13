@@ -21,7 +21,7 @@ class District extends Model
         'status'
     ];
 
-    public function Division()
+    public function division()
     {
         return $this->belongsTo(Division::class, 'division_id');
     }
