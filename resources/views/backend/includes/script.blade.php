@@ -13,3 +13,47 @@
     new PerfectScrollbar('.product-list');
     new PerfectScrollbar('.customers-list');
 </script>
+
+<!-- Toastr Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+<script type="text/javascript">
+    @if(Session::has('message'))
+
+    var type = "{{ Session::get('alert-type','info') }}";
+    switch (type) {
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+
+    @endif
+</script>

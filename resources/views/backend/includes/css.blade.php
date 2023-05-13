@@ -1,3 +1,8 @@
+<!-- Bootstrap CSS -->
+<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{asset('backend/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+
 <!--plugins-->
 <link href="{{asset('backend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 <link href="{{asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
@@ -6,14 +11,16 @@
 <!-- loader-->
 <link href="{{asset('backend/assets/css/pace.min.css')}}" rel="stylesheet" />
 <script src="{{asset('backend/assets/js/pace.min.js')}}"></script>
-<!-- Bootstrap CSS -->
-<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
-<link href="{{asset('backend/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+
+
 <link href="{{asset('backend/assets/css/app.css')}}" rel="stylesheet">
 <link href="{{asset('backend/assets/css/custom.css')}}" rel="stylesheet">
 <link href="{{asset('backend/assets/css/icons.css')}}" rel="stylesheet">
+
 <!-- Theme Style CSS -->
 <link rel="stylesheet" href="{{asset('backend/assets/css/dark-theme.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/assets/css/semi-dark.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/assets/css/header-colors.css')}}" />
+
+<!-- Toastr Css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

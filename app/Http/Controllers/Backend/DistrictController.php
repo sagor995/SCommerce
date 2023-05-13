@@ -54,7 +54,13 @@ class DistrictController extends Controller
         //dd($district);
         //exit();
         $district->save();
-        return redirect()->route('district.manage');
+
+        $notification = array(
+            'message' => 'District Added Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('district.manage')->with($notification);
     }
 
     /**
@@ -95,7 +101,13 @@ class DistrictController extends Controller
             //dd($district);
             //exit();
             $district->save();
-            return redirect()->route('district.manage');
+
+            $notification = array(
+                'message' => 'District Information Updated.',
+                'alert-type' => 'info'
+            );
+
+            return redirect()->route('district.manage')->with($notification);
         } else {
             //404 Not found
         }
@@ -116,7 +128,13 @@ class DistrictController extends Controller
             //Soft delete
             $district->status = 0;
             $district->save();
-            return redirect()->route('district.manage');
+
+            $notification = array(
+                'message' => 'District Information Deleted.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('district.manage')->with($notification);
         } else {
             //404 Not found
         }
