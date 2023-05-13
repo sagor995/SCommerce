@@ -39,7 +39,9 @@
 <script type="text/javascript">
     @if(Session::has('message'))
 
+    //Define and make default alert-type
     var type = "{{ Session::get('alert-type','info') }}";
+
     switch (type) {
         case 'success':
             toastr.success("{{ Session::get('message') }}");

@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\DistrictController;
 // });
 
 Route::get('/', [PagesController::class, "index"])->name('homepage');
+Route::get('/about', [PagesController::class, "about"])->name('about');
 
 /*
 |--------------------------------------------------------------------------

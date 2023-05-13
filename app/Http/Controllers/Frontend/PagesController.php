@@ -17,6 +17,15 @@ class PagesController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function about()
+    {
+        //
+        return view("frontend.pages.static-pages.about");
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
