@@ -57,7 +57,13 @@ class CategoryController extends Controller
         //dd($category);
         //exit();
         $category->save();
-        return redirect()->route('category.manage');
+
+        $notification = array(
+            'message' => 'Category Added Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('category.manage')->with($notification);
     }
 
     /**
@@ -112,7 +118,13 @@ class CategoryController extends Controller
             //dd($category);
             //exit();
             $category->save();
-            return redirect()->route('category.manage');
+
+            $notification = array(
+                'message' => 'Information Updated.',
+                'alert-type' => 'info'
+            );
+
+            return redirect()->route('category.manage')->with($notification);
         } else {
             //404 Not found
         }
@@ -145,7 +157,13 @@ class CategoryController extends Controller
             //Soft delete
             $category->status = 0;
             $category->save();
-            return redirect()->route('category.manage');
+
+            $notification = array(
+                'message' => 'The Category Moved to the Trash folder.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('category.manage')->with($notification);
         } else {
             //404 Not found
         }

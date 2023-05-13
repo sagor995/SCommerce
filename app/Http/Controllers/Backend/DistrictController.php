@@ -103,7 +103,7 @@ class DistrictController extends Controller
             $district->save();
 
             $notification = array(
-                'message' => 'District Information Updated.',
+                'message' => 'Information Updated.',
                 'alert-type' => 'info'
             );
 
@@ -130,7 +130,7 @@ class DistrictController extends Controller
             $district->save();
 
             $notification = array(
-                'message' => 'District Information Deleted.',
+                'message' => 'The District Moved to the Trash folder.',
                 'alert-type' => 'error'
             );
 

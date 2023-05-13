@@ -53,7 +53,13 @@ class DivisionController extends Controller
         //dd($division);
         //exit();
         $division->save();
-        return redirect()->route('division.manage');
+
+        $notification = array(
+            'message' => 'Division Added Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('division.manage')->with($notification);
     }
 
     /**
@@ -92,7 +98,13 @@ class DivisionController extends Controller
             //dd($category);
             //exit();
             $division->save();
-            return redirect()->route('division.manage');
+
+            $notification = array(
+                'message' => 'Information Updated.',
+                'alert-type' => 'info'
+            );
+
+            return redirect()->route('division.manage')->with($notification);
         } else {
             //404 Not found
         }
@@ -113,7 +125,13 @@ class DivisionController extends Controller
             //Soft delete
             $division->status = 0;
             $division->save();
-            return redirect()->route('division.manage');
+
+            $notification = array(
+                'message' => 'The Division Moved to the Trash folder.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('division.manage')->with($notification);
         } else {
             //404 Not found
         }

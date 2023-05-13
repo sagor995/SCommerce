@@ -55,7 +55,13 @@ class BrandController extends Controller
         //dd($brand);
         //exit();
         $brand->save();
-        return redirect()->route('brand.manage');
+
+        $notification = array(
+            'message' => 'Brand Added Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('brand.manage')->with($notification);
     }
 
     /**
@@ -108,7 +114,13 @@ class BrandController extends Controller
             //dd($brand);
             //exit();
             $brand->save();
-            return redirect()->route('brand.manage');
+
+            $notification = array(
+                'message' => 'Information Updated.',
+                'alert-type' => 'info'
+            );
+
+            return redirect()->route('brand.manage')->with($notification);
         } else {
             //404 Not found
         }
@@ -142,7 +154,13 @@ class BrandController extends Controller
             //Soft delete
             $brand->status = 0;
             $brand->save();
-            return redirect()->route('brand.manage');
+
+            $notification = array(
+                'message' => 'The Brand Moved to the Trash folder.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('brand.manage')->with($notification);
         } else {
             //404 Not found
         }
