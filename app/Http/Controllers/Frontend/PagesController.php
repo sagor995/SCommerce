@@ -28,6 +28,51 @@ class PagesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function contact()
+    {
+        //
+        return view("frontend.pages.static-pages.contact");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function faq()
+    {
+        //
+        return view("frontend.pages.static-pages.faq");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function privacyPolicy()
+    {
+        //
+        return view("frontend.pages.static-pages.privacy-policy");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function returnRefund()
+    {
+        //
+        return view("frontend.pages.static-pages.return-and-refund-policy");
+    }
+
+     /**
+     * Display a listing of the resource.
+     */
+    public function toc()
+    {
+        //
+        return view("frontend.pages.static-pages.toc");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
     public function products()
     {
         //

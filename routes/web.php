@@ -30,6 +30,11 @@ use App\Http\Controllers\Backend\DistrictController;
 
 Route::get('/', [PagesController::class, "index"])->name('homepage');
 Route::get('/about', [PagesController::class, "about"])->name('about');
+Route::get('/contact', [PagesController::class, "contact"])->name('contact');
+Route::get('/faq', [PagesController::class, "faq"])->name('faq');
+Route::get('/privacy-and-policy', [PagesController::class, "privacyPolicy"])->name('privacyPolicy');
+Route::get('/return-and-refund-policy', [PagesController::class, "returnRefund"])->name('returnRefund');
+Route::get('/terms-and-conditions', [PagesController::class, "toc"])->name('toc');
 
 //Products
 Route::get('/products', [PagesController::class, "products"])->name('products');
