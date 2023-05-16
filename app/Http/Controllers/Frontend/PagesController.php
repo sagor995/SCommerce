@@ -28,6 +28,26 @@ class PagesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function products()
+    {
+        //
+        return view("frontend.pages.product.all-products");
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function pdetails()
+    {
+        //
+        return view("frontend.pages.product.details");
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     */
     public function cart()
     {
         //

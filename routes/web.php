@@ -31,7 +31,11 @@ use App\Http\Controllers\Backend\DistrictController;
 Route::get('/', [PagesController::class, "index"])->name('homepage');
 Route::get('/about', [PagesController::class, "about"])->name('about');
 
+//Products
+Route::get('/products', [PagesController::class, "products"])->name('products');
+Route::get('/details', [PagesController::class, "pdetails"])->name('pdetails');
 
+//Cart & Checkout
 Route::get('/cart', [PagesController::class, "cart"])->name('cart');
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 
