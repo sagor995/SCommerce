@@ -26,6 +26,24 @@ class PagesController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function cart()
+    {
+        //
+        return view("frontend.pages.cart");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function checkout()
+    {
+        //
+        return view("frontend.pages.checkout");
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

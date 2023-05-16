@@ -31,6 +31,10 @@ use App\Http\Controllers\Backend\DistrictController;
 Route::get('/', [PagesController::class, "index"])->name('homepage');
 Route::get('/about', [PagesController::class, "about"])->name('about');
 
+
+Route::get('/cart', [PagesController::class, "cart"])->name('cart');
+Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
+
 /*
 |--------------------------------------------------------------------------
 | Backend Web Routes
