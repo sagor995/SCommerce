@@ -35,6 +35,10 @@ Route::get('/about', [PagesController::class, "about"])->name('about');
 Route::get('/products', [PagesController::class, "products"])->name('products');
 Route::get('/details', [PagesController::class, "pdetails"])->name('pdetails');
 
+//User Auth Pages
+Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');
+Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->name('customerDashboard');
+
 //Cart & Checkout
 Route::get('/cart', [PagesController::class, "cart"])->name('cart');
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');

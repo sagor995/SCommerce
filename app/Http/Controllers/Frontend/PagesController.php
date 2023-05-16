@@ -44,6 +44,24 @@ class PagesController extends Controller
         return view("frontend.pages.product.details");
     }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function userLogin()
+    {
+        //
+        return view("frontend.pages.auth-user.login");
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function customerDashboard()
+    {
+        //
+        return view("frontend.pages.customer-dashboard.myaccount");
+    }
+
 
     /**
      * Display a listing of the resource.
