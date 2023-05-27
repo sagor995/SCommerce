@@ -326,8 +326,8 @@
                  <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <img src="{{asset('backend/assets/images/icons/user.png')}}" class="user-img" alt="user avatar">
                      <div class="user-info ps-3">
-                         <p class="user-name mb-0">Super Admin</p>
-                         <p class="designattion mb-0">Backend Developer</p>
+                         <p class="user-name mb-0">{{ Auth::user()->name }}</p>
+                         <p class="designattion mb-0">Super Admin</p>
                      </div>
                  </a>
                  <ul class="dropdown-menu dropdown-menu-end">
@@ -344,7 +344,15 @@
                      <li>
                          <div class="dropdown-divider mb-0"></div>
                      </li>
-                     <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                     <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                <i class='bx bx-log-out-circle'></i>
+                                <span>Logout</span>
+                            </a>
+                        </form>
                      </li>
                  </ul>
              </div>
