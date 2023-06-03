@@ -1,27 +1,34 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
-    </div>
+@extends('auth.layout.template')
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+@section('auth-body')
+		<div class="authentication-forgot d-flex align-items-center justify-content-center">
+			<div class="card forgot-box shadow-none">
+				<div class="card-body">
+					<div class="p-4 rounded  border">
+						<div class="text-center">
+							<img src="{{ asset('backend/assets/images/icons/forgot-2.png') }}" width="120" alt="" />
+						</div>
+						<h4 class="mt-5 font-weight-bold">{{ __('Confirm Your Password') }}</h4>
 
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                        <form method="POST" action="{{ route('password.confirm') }}">
+                            @csrf
+                            <div class="my-4">
+                                <label for="password" class="form-label">{{ __('Password') }}</label>
+                                <input type="password" id="password" name="password" class="form-control form-control-lg" 
+                                placeholder="Enter Your Email" required autocomplete="current-password"/>
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-primary btn-lg">{{ __('Confirm Password') }}</button>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+@endsection
 
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
