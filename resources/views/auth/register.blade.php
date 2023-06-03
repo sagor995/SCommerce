@@ -9,8 +9,8 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center mb-4">
-										<h3 class="">Sign Up</h3>
-										<p class="mb-0">Create your account</p>
+										<h3 class="">{{ __('Sign Up') }}</h3>
+										<p class="mb-0">{{ __('Create your account') }}</p>
 									</div>
 							
 									<div class="form-body">
@@ -57,16 +57,16 @@
                                         <div class="col-12">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                                <label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms & Conditions</label>
+                                                <label class="form-check-label" for="flexSwitchCheckChecked">{{ __('I read and agree to Terms & Conditions') }}</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary"><i class='bx bx-user'></i>Sign up</button>
+                                                <button type="submit" class="btn btn-primary"><i class='bx bx-user'></i>{{ __('Sign up') }}</button>
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="mb-0">Already have an account? <a href="{{ route('login') }}">Sign in here</a>
+                                            <p class="mb-0">{{ __('Already have an account?') }}<a href="{{ route('login') }}">{{ __('Sign in here') }}</a>
                                             </p>
                                         </div>
                                     </form>

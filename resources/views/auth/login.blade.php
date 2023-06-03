@@ -11,8 +11,8 @@
                         <div class="card-body">
                             <div class="border p-4 rounded">
                                 <div class="text-center mb-4">
-                                    <h3 class="">Sign in</h3>
-                                    <p class="mb-0">Login to your account</p>
+                                    <h3 class="">{{ __('Sign in') }}</h3>
+                                    <p class="mb-0">{{ __('Login to your account') }}</p>
                                 </div>
                                 <div class="form-body">
 
