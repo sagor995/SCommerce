@@ -1,7 +1,7 @@
 @extends('auth.layout.template')
 
 @section('auth-body')
-		<div class="d-flex align-items-center justify-content-center py-5 my-lg-0">
+		<div class="d-flex align-items-center justify-content-center my-lg-0" style="padding-top: 150px;">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
 					<div class="col mx-auto">
