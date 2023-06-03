@@ -18,3 +18,14 @@
 .action-bar ul li .lni-trash {
     font-size: 16px;
 }
+
+.auth-error {
+    padding: 0;
+    margin: 0;
+}
+
+.auth-error li {
+    color: #880000;
+    list-style: none;
+    padding: 10px;
+}

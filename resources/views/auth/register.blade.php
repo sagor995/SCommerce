@@ -16,14 +16,14 @@
 									<div class="form-body">
                                     <form class="row g-3" method="POST" action="{{ route('register') }}">
                                         @csrf
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label for="name" class="form-label">Full Name</label>
                                             <input type="name" id="name" name="name" class="form-control" placeholder="Write your full name" 
                                             value="{{ old('name') }}" required autofocus autocomplete="name">
                                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label for="email" class="form-label">Email Address</label>
                                             <input type="email" name="email" id="email" class="form-control" 
                                             placeholder="Email Address" value="{{ old('email') }}" required autocomplete="email">
