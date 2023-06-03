@@ -6,7 +6,7 @@
 				<div class="card-body">
 					<div class="p-4 rounded  border">
 						<div class="text-center">
-							<img src="assets/images/icons/forgot-2.png" width="120" alt="" />
+							<img src="{{ asset('backend/assets/images/icons/forgot-2.png') }}" width="120" alt="" />
 						</div>
 						<h4 class="mt-5 font-weight-bold">{{ __('Forgot Password?') }}</h4>
 						<p class="text-muted">{{ __('Just let us know your email address.') }}</p>
