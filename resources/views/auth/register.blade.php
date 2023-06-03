@@ -66,7 +66,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="mb-0">{{ __('Already have an account?') }}<a href="{{ route('login') }}">{{ __('Sign in here') }}</a>
+                                            <p class="mb-0">{{ __('Already have an account? ') }}<a href="{{ route('login') }}">{{ __('Sign in here') }}</a>
                                             </p>
                                         </div>
                                     </form>

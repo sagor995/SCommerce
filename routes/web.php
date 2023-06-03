@@ -60,7 +60,7 @@ Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 */
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'verified'])->name('admin.dashboard');
 
     Route::group(['prefix' => '/brand'], function () {
         Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
