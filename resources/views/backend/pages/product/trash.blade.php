@@ -1,7 +1,7 @@
 @extends('backend.layout.template')
 
 @section('page-title')
-<title>Manage All Categories | Ecommerce Platform</title>
+<title>Manage All Products | Ecommerce Platform</title>
 @endsection
 
 @section('body-css')
@@ -15,15 +15,15 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <div>
-                    <h5 class="mb-0">Manage All Categories</h5>
+                    <h5 class="mb-0">Manage All Products</h5>
                 </div>
                 <div class="dropdown options ms-auto">
-                    <a href="{{route('category.manage')}}"><span class="btn btn-primary btn-sm">View Active Categories</span></a>
+                    <a href="{{route('product.manage')}}"><span class="btn btn-primary btn-sm">View Active Products</span></a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            @if($categories->count()>0)
+            @if($products->count()>0)
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-striped table-hover table-border" id="bdata_table">
                     <thead class="table-dark">

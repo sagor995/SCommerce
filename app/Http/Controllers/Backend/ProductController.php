@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use Illuminate\Support\Str;
@@ -19,15 +20,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::orderBy('id','desc')->where('status',1)->get();
+        return view('backend.pages.product.manage', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create(){
+        
     }
 
     /**
@@ -60,6 +61,15 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    /**
+     * Display a listing of the trash.
+     */
+    public function trash()
+    {
+        $products = Product::orderBy('id','desc')->where('status',0)->get();
+        return view('backend.pages.product.trash', compact('products'));
     }
 
     /**
