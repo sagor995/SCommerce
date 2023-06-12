@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->unique();
+            $table->integer('is_featured')->default(0)->comment('0=Neg, 1=Pos');
+            $table->integer('regular_price')->nullable;
+            $table->integer('offer_price')->nullable;
+            $table->integer('quantity')->nullable;
+            $table->string('short_desc')->nullable;
+            $table->string('long_desc')->nullable;
+            $table->string('status')->default(1)->comment('1=Active, 0=Inactive');
             $table->timestamps();
         });
     }
