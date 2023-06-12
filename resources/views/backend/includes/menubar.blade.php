@@ -47,6 +47,20 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Product</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Add New Product</a>
+                </li>
+                <li> <a href="{{route('product.manage')}}"><i class="bx bx-right-arrow-alt"></i>Manage All Product</a>
+                </li>
+            </ul>
+        </li>
+
 
 
         <li class="menu-label">Order Management</li>

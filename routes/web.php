@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\DivisionController;
 use App\Http\Controllers\Backend\DistrictController;
 
@@ -80,6 +81,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class, "edit"])->name('category.edit');
         Route::post('/update/{id}', [CategoryController::class, "update"])->name('category.update');
         Route::post('/destroy/{id}', [CategoryController::class, "destroy"])->name('category.destroy');
+    });
+
+    Route::group(['prefix' => '/product'], function () {
+        Route::get('/manage', [ProductController::class, "index"])->name('product.manage');
+        Route::get('/trash', [ProductController::class, "trash"])->name('product.trash');
+        Route::get('/add', [ProductController::class, "create"])->name('product.create');
+        Route::post('/store', [ProductController::class, "store"])->name('product.store');
+        Route::get('/edit/{id}', [ProductController::class, "edit"])->name('product.edit');
+        Route::post('/update/{id}', [ProductController::class, "update"])->name('product.update');
+        Route::post('/destroy/{id}', [ProductController::class, "destroy"])->name('product.destroy');
     });
 
     Route::group(['prefix' => '/division'], function () {
