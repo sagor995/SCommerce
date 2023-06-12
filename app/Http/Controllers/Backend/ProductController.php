@@ -28,7 +28,10 @@ class ProductController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        
+        $brands = Brand::orderBy('name','asc')->where('status',1)->get();
+        //Parent Categories
+        $pcategories = Category::orderBy('name','asc')->where('is_parent',0)->get();
+        return view('backend.pages.product.create',compact('brands','pcategories'));
     }
 
     /**
@@ -36,7 +39,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product;
+
+        $product->title             = $request->title;
+        $product->slug             = Str::slug($request->title);
+        $product->brand_id          = $request->brand_id;
+        $product->category_id       = $request->category_id;
+        $product->is_featured       = $request->is_featured;
+        $product->regular_price     = $request->regular_price;
+        $product->offer_price       = $request->offer_price;
+        $product->quantity          = $request->quantity;
+        $product->short_desc        = $request->short_desc;
+        $product->long_desc         = $request->long_desc;
+        $product->status            = $request->status;
+
+        $product->save();
+
+        $notification = array(
+            'message' => 'Product Published Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('product.manage')->with($notification);
     }
 
     /**

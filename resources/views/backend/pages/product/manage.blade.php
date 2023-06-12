@@ -58,13 +58,6 @@
                             <td>{{$product->quantity}}</td>
                             <td>{{$product->is_featured}}</td>
                             <td>
-                                @if($category->is_parent == 0 )
-                                <span class="badge bg-info">Parent Category</span>
-                                @else
-                                {{$category->parent->name}}
-                                @endif
-                            </td>
-                            <td>
                                 @if($product->status == 1)
                                 <span class="badge bg-primary">Active</span>
                                 @elseif($product->status == 0)
