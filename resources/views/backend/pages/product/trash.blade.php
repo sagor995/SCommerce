@@ -1,7 +1,7 @@
 @extends('backend.layout.template')
 
 @section('page-title')
-<title>Manage All Products | Ecommerce Platform</title>
+<title>Manage Product Trash | Ecommerce Platform</title>
 @endsection
 
 @section('body-css')
@@ -18,12 +18,12 @@
                     <h5 class="mb-0">Manage All Products</h5>
                 </div>
                 <div class="dropdown options ms-auto">
-                    <a href="{{route('product.manage')}}"><span class="btn btn-primary btn-sm">View Active Products</span></a>
+                    <a href="{{route('product.manage')}}"><span class="btn btn-primary btn-sm">View Product</span></a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-        @if($products->count()>0)
+            @if($products->count()>0)
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-striped table-hover table-border" id="bdata_table">
                     <thead class="table-dark">
@@ -57,13 +57,6 @@
                             <td>{{$product->offer_price}}</td>
                             <td>{{$product->quantity}}</td>
                             <td>{{$product->is_featured}}</td>
-                            <td>
-                                @if($category->is_parent == 0 )
-                                <span class="badge bg-info">Parent Category</span>
-                                @else
-                                {{$category->parent->name}}
-                                @endif
-                            </td>
                             <td>
                                 @if($product->status == 1)
                                 <span class="badge bg-primary">Active</span>

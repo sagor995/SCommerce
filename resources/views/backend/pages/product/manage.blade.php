@@ -31,8 +31,8 @@
                             <th>#Sr.</th>
                             <th>Image</th>
                             <th>Title</th>
-                            <th>Category</th>
                             <th>Brand</th>
+                            <th>Category</th>
                             <th>Regular Price</th>
                             <th>Offer Price</th>
                             <th>Stock Quantity</th>
@@ -51,15 +51,21 @@
                                 Image
                             </td>
                             <td>{{$product->title}}</td>
-                            <td>{{$product->category_id}}</td>
-                            <td>{{$product->brand_id}}</td>
-                            <td>{{$product->regular_price}}</td>
-                            <td>{{$product->offer_price}}</td>
-                            <td>{{$product->quantity}}</td>
-                            <td>{{$product->is_featured}}</td>
+                            <td>{{$product->brand->name}}</td>
+                            <td>{{$product->category->name}}</td>
+                            <td>{{$product->regular_price}} BDT</td>
+                            <td>{{$product->offer_price}} BDT</td>
+                            <td>{{$product->quantity}} Pcs</td>
+                            <td>
+                                @if($product->is_featured == 1)
+                                <span class="badge bg-info">On Sale</span>
+                                @elseif($product->is_featured == 0)
+                                <span class="badge bg-primary">Regular Product</span>
+                                @endif
+                            </td>
                             <td>
                                 @if($product->status == 1)
-                                <span class="badge bg-primary">Active</span>
+                                <span class="badge bg-success">Active</span>
                                 @elseif($product->status == 0)
                                 <span class="badge bg-warning">Inactive</span>
                                 @endif

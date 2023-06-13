@@ -76,7 +76,15 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        if (!is_null($product)) {
+            $brands = Brand::orderBy('name','asc')->where('status',1)->get();
+            //Parent Categories
+            $pcategories = Category::orderBy('name','asc')->where('is_parent',0)->get();
+            return view('backend.pages.product.edit', compact('product', 'brands', 'pcategories'));
+        } else {
+            //404 Not found
+        }
     }
 
     /**
@@ -84,7 +92,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        if (!is_null($product)) {
+            $product->title             = $request->title;
+            $product->slug             = Str::slug($request->title);
+            $product->brand_id          = $request->brand_id;
+            $product->category_id       = $request->category_id;
+            $product->is_featured       = $request->is_featured;
+            $product->regular_price     = $request->regular_price;
+            $product->offer_price       = $request->offer_price;
+            $product->quantity          = $request->quantity;
+            $product->short_desc        = $request->short_desc;
+            $product->long_desc         = $request->long_desc;
+            $product->status            = $request->status;
+    
+            $product->save();
+    
+            $notification = array(
+                'message' => 'Product Updated Successfully.',
+                'alert-type' => 'info'
+            );
+    
+            return redirect()->route('product.manage')->with($notification);
+        }else{
+            //404
+        }
     }
 
     /**
@@ -101,6 +133,25 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        if (!is_null($product)) {
+            //Image Delete
+
+            //Content Delete
+            //$product->delete();
+
+            //Soft delete
+            $product->status = 0;
+            $product->save();
+
+            $notification = array(
+                'message' => 'The Product Moved to the Trash folder.',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('product.manage')->with($notification);
+        } else {
+            //404 Not found
+        }
     }
 }
