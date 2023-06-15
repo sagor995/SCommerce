@@ -26,9 +26,14 @@
 
                         <span class="product-thumb-info border-0">
                             <!-- Add To Cart -->
-                            <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
-                                <span class="text-uppercase text-1">Add to Cart</span>
-                            </a>
+                            <form action="" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $product->id}}" name="product_id" />
+                                <input type="hidden" value="1" name="quantity" />
+                                <button type="submit" class="add-to-cart-product bg-color-primary w-100 border-0">
+                                    <span class="text-uppercase text-1">Add to Cart</span>
+                                </button>
+                            </form>
                             <!-- Image Thumbnail -->
                             <a href="{{ route('pdetails',$product->slug) }}">
                                 <span class="product-thumb-info-image">
