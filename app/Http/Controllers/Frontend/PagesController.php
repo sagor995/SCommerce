@@ -4,6 +4,15 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Models\User;
+use App\Models\Division;
+use App\Models\District;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image as Image;
 
 class PagesController extends Controller
 {
@@ -75,15 +84,15 @@ class PagesController extends Controller
      */
     public function products()
     {
-        //
-        return view("frontend.pages.product.all-products");
+        $products = Product::orderBy('id','desc')->where('status',1)->get();
+        return view("frontend.pages.product.all-products", compact('products'));
     }
 
 
     /**
      * Display a listing of the resource.
      */
-    public function pdetails()
+    public function pdetails(string $id, $slug)
     {
         //
         return view("frontend.pages.product.details");

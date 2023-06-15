@@ -38,8 +38,8 @@ Route::get('/return-and-refund-policy', [PagesController::class, "returnRefund"]
 Route::get('/terms-and-conditions', [PagesController::class, "toc"])->name('toc');
 
 //Products
-Route::get('/products', [PagesController::class, "products"])->name('products');
-Route::get('/details', [PagesController::class, "pdetails"])->name('pdetails');
+Route::get('/all-products', [PagesController::class, "products"])->name('products');
+Route::get('/product-details/{slug}', [PagesController::class, "pdetails"])->name('pdetails');
 
 //User Auth Pages
 Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');

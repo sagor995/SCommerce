@@ -1,7 +1,7 @@
 @extends('frontend.layout.template')
 
 @section('page-title')
-<title>Details | SCommerce Website</title>
+<title>Product Details</title>
 @endsection
 
 @section('body-css')
