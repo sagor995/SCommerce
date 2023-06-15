@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //FrontEnd
 use App\Http\Controllers\Frontend\PagesController;
+use App\Http\Controllers\Frontend\CartController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
@@ -46,7 +47,7 @@ Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogi
 Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->name('customerDashboard');
 
 //Cart & Checkout
-Route::get('/cart', [PagesController::class, "cart"])->name('cart');
+Route::get('/cart', [CartController::class, "index"])->name('cart');
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 
 /*

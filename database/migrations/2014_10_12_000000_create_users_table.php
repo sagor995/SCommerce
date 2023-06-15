@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('address_line1')->nullable();
             $table->text('address_line2')->nullable();
+            $table->integer('division_id')->nullable();
+            $table->integer('district_id')->nullable();
             $table->text('image')->nullable();
             $table->integer('is_admin')->default(2)->comment('1=admin, 2=customner');
             $table->rememberToken();

@@ -24,6 +24,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'address_line1',
         'address_line2',
+        'division_id',
+        'district_id',
         'image',
         'is_admin',
     ];
