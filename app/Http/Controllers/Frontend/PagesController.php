@@ -92,10 +92,10 @@ class PagesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function pdetails(string $id, $slug)
+    public function pdetails($slug)
     {
-        //
-        return view("frontend.pages.product.details");
+        $pdetails = Product::where('slug',$slug)->first();
+        return view("frontend.pages.product.details", compact('pdetails'));
     }
 
     /**
