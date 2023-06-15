@@ -65,7 +65,7 @@
                                     <div class="col-md-6">
                                         <label for="offer_price" class="form-label">Offer Price [ BDT ]</label>
                                         <input type="text" id="offer_price" name="offer_price" class="form-control" 
-                                        placeholder="00.00" value="{{ $product->offer_price }}" required/>
+                                        placeholder="00.00" value="{{ $product->offer_price }}"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="quantity" class="form-label">Stock Quantity</label>

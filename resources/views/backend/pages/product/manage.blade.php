@@ -54,7 +54,13 @@
                             <td>{{$product->brand->name}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->regular_price}} BDT</td>
-                            <td>{{$product->offer_price}} BDT</td>
+                            <td>
+                                @if(!is_null($product->offer_price))
+                                    {{ $product->offer_price }} BDT
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                             <td>{{$product->quantity}} Pcs</td>
                             <td>
                                 @if($product->is_featured == 1)
