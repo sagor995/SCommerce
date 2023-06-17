@@ -170,7 +170,7 @@
                                     {{ $pdetails->short_desc }}
                                 </p>
 
-                                <form action="" method="POST" class="cart">
+                                <form action="{{ route('cart.store') }}" method="POST" class="cart">
                                     @csrf
                                     <input type="hidden" value="{{ $pdetails->id}}" name="product_id" />
                                     <div class="quantity quantity-lg">

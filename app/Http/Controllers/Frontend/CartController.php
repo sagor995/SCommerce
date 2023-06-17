@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Support\Str;
+use Auth;
 
 class CartController extends Controller
 {
@@ -19,35 +21,34 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        //check if logged in or not with product in cart or not.
+        if(Auth::check()){
+            $cart = Cart::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->first();
+        }else{
+            $cart = Cart::where('ip_address', request()->ip())->where('product_id', $request->product_id)->first();
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        //If already exists in cart then.
+        if(!is_null($cart)){
+            $cart->increment('quantity');
+        }else{
+            $cart = new Cart();
+            if(Auth::check()){
+                $cart->user_id      = Auth::user()->id;
+            }else{
+                $cart->ip_address   = request()->ip();
+            }
+            $cart->product_id       = $request->product_id;
+            $cart->quantity         = $request->quantity;
+            $cart->save();
+        }
+        
+        return back();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

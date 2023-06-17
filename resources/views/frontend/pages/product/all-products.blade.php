@@ -26,7 +26,7 @@
 
                         <span class="product-thumb-info border-0">
                             <!-- Add To Cart -->
-                            <form action="" method="POST">
+                            <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ $product->id}}" name="product_id" />
                                 <input type="hidden" value="1" name="quantity" />
