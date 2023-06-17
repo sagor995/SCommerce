@@ -80,7 +80,7 @@
                                 <a href="#" class="header-nav-features-toggle">
                                     <img src="{{asset('frontend/img/icons/icon-cart-big.svg')}}" height="34" alt="" class="header-nav-top-icon-img">
                                     <span class="cart-info">
-                                        <span class="cart-qty">1</span>
+                                        <span class="cart-qty">{{ App\Models\Cart::totalItems() }}</span>
                                     </span>
                                 </a>
                                 <div class="header-nav-features-dropdown" id="headerTopCartDropdown">
