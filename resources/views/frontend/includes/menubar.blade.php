@@ -85,22 +85,29 @@
                                 </a>
                                 <div class="header-nav-features-dropdown" id="headerTopCartDropdown">
                                     <ol class="mini-products-list">
+                                        @foreach(App\Models\Cart::totalCarts() as $cart)
                                         <li class="item">
                                             <a href="#" title="Camera X1000" class="product-image"><img src="{{asset('frontend/img/products/product-1.jpg')}}" alt="Camera X1000"></a>
                                             <div class="product-details">
                                                 <p class="product-name">
-                                                    <a href="#">Camera X1000 </a>
+                                                    <a href="#">{{ $cart->product->title }} </a>
                                                 </p>
                                                 <p class="qty-price">
-                                                    1X <span class="price">$890</span>
+                                                    {{$cart->quantity}} X 
+                                                    @if(!is_null($cart->product->offer_price))
+                                                        <span class="price">{{$cart->product->offer_price}}</span>
+                                                    @else
+                                                        <span class="price">{{$cart->product->regular_price}}</span>
+                                                    @endif
                                                 </p>
                                                 <a href="#" title="Remove This Item" class="btn-remove"><i class="fas fa-times"></i></a>
                                             </div>
                                         </li>
+                                        @endforeach
                                     </ol>
                                     <div class="totals">
                                         <span class="label">Total:</span>
-                                        <span class="price-total"><span class="price">$890</span></span>
+                                        <span class="price-total"><span class="price">{{ App\Models\Cart::totalItemsPrice() }} BDT</span></span>
                                     </div>
                                     <div class="actions">
                                         <a class="btn btn-dark" href="#">View Cart</a>

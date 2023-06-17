@@ -49,4 +49,34 @@ class Cart extends Model
         }
         return $total_item;
     }
+
+    public static function totalItemsPrice(){
+        if(Auth::check()){
+            $carts = Cart::where('user_id', Auth::user()->id)->where('order_id', NULL)->get();
+        }else{
+            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
+        }
+
+        $total_item_price = 0;
+
+        foreach($carts as $cart){
+            if(!is_null($cart->product->offer_price)){
+                $total_item_price += ($cart->quantity * $cart->product->offer_price);
+            }else{
+                $total_item_price += ($cart->quantity * $cart->product->regular_price);
+            }
+        }
+        return $total_item_price;
+    }
+
+    //Total num of products in cart
+    public static function totalCarts(){
+        if(Auth::check()){
+            $carts = Cart::where('user_id', Auth::user()->id)->where('order_id', NULL)->get();
+        }else{
+            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
+        }
+
+        return $carts;
+    }
 }
