@@ -51,6 +51,7 @@
                                                 {{ $product->offer_price }} BDT
                                             </span></ins>
                                         </span>
+                                    @else
                                         <span class="price">
                                             <ins><span class="amount text-dark font-weight-semibold">
                                                 {{ $product->regular_price }} BDT

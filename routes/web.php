@@ -46,8 +46,17 @@ Route::get('/product-details/{slug}', [PagesController::class, "pdetails"])->nam
 Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');
 Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->name('customerDashboard');
 
-//Cart & Checkout
-Route::get('/cart', [CartController::class, "index"])->name('cart');
+//Cart
+Route::group(['prefix'=>'/cart'], function(){
+    Route::get('/', [CartController::class, "index"])->name('cart');
+    Route::post('/store', [CartController::class, "store"])->name('cart.store');
+    Route::post('/update/{id}', [CartController::class, "update"])->name('cart.update');
+    Route::post('/delete/{id}', [CartController::class, "delete"])->name('cart.delete');
+});
+
+
+
+//Checkout
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 
 /*
