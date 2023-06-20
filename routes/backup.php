@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 //FrontEnd
 use App\Http\Controllers\Frontend\PagesController;
+use App\Http\Controllers\Frontend\CartController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\DivisionController;
 use App\Http\Controllers\Backend\DistrictController;
 
@@ -37,15 +39,24 @@ Route::get('/return-and-refund-policy', [PagesController::class, "returnRefund"]
 Route::get('/terms-and-conditions', [PagesController::class, "toc"])->name('toc');
 
 //Products
-Route::get('/products', [PagesController::class, "products"])->name('products');
-Route::get('/details', [PagesController::class, "pdetails"])->name('pdetails');
+Route::get('/all-products', [PagesController::class, "products"])->name('products');
+Route::get('/product-details/{slug}', [PagesController::class, "pdetails"])->name('pdetails');
 
 //User Auth Pages
 Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');
 Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->name('customerDashboard');
 
-//Cart & Checkout
-Route::get('/cart', [PagesController::class, "cart"])->name('cart');
+//Cart
+Route::group(['prefix'=>'/cart'], function(){
+    Route::get('/', [CartController::class, "index"])->name('cart.manage');
+    Route::post('/store', [CartController::class, "store"])->name('cart.store');
+    Route::post('/update/{id}', [CartController::class, "update"])->name('cart.update');
+    Route::post('/delete/{id}', [CartController::class, "destroy"])->name('cart.delete');
+});
+
+
+
+//Checkout
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 
 /*
@@ -60,7 +71,7 @@ Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 */
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/dashboard', [DashboardController::class, "index"])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'verified'])->name('admin.dashboard');
 
     Route::group(['prefix' => '/brand'], function () {
         Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
@@ -80,6 +91,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class, "edit"])->name('category.edit');
         Route::post('/update/{id}', [CategoryController::class, "update"])->name('category.update');
         Route::post('/destroy/{id}', [CategoryController::class, "destroy"])->name('category.destroy');
+    });
+
+    Route::group(['prefix' => '/product'], function () {
+        Route::get('/manage', [ProductController::class, "index"])->name('product.manage');
+        Route::get('/trash', [ProductController::class, "trash"])->name('product.trash');
+        Route::get('/add', [ProductController::class, "create"])->name('product.create');
+        Route::post('/store', [ProductController::class, "store"])->name('product.store');
+        Route::get('/edit/{id}', [ProductController::class, "edit"])->name('product.edit');
+        Route::post('/update/{id}', [ProductController::class, "update"])->name('product.update');
+        Route::post('/destroy/{id}', [ProductController::class, "destroy"])->name('product.destroy');
     });
 
     Route::group(['prefix' => '/division'], function () {
@@ -102,6 +123,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/destroy/{id}', [DistrictController::class, "destroy"])->name('district.destroy');
     });
 });
+
+require __DIR__.'/auth.php';
+?>
 
 <?php
 

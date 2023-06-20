@@ -23,6 +23,12 @@
                                     <div class="featured-box featured-box-primary text-left mt-2">
                                         <div class="box-content">
                                             <form method="post" action="">
+
+                                                @if(App\Models\Cart::totalItems() == 0)
+                                                    <div class="alert alert-info">
+                                                        You have no items in your cart!. Let's go buy something.
+                                                    </div>
+                                                @else
                                                 <table class="shop_table cart">
                                                     <thead>
                                                         <tr>
@@ -47,96 +53,43 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr class="cart_table_item">
-                                                            <td class="product-remove">
-                                                                <a title="Remove this item" class="remove" href="#">
-                                                                    <i class="fas fa-times"></i>
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-thumbnail">
-                                                                <a href="shop-product-sidebar-left.html">
-                                                                    <img width="100" height="100" alt="" class="img-fluid" src="{{asset('frontend/img/products/product-grey-1.jpg')}}">
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-name">
-                                                                <a href="shop-product-sidebar-left.html">Photo Camera</a>
-                                                            </td>
-                                                            <td class="product-price">
-                                                                <span class="amount">$299</span>
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                <form enctype="multipart/form-data" method="post" class="cart">
-                                                                    <div class="quantity">
-                                                                        <input type="button" class="minus" value="-">
-                                                                        <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                                                        <input type="button" class="plus" value="+">
-                                                                    </div>
-                                                                </form>
-                                                            </td>
-                                                            <td class="product-subtotal">
-                                                                <span class="amount">$299</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="cart_table_item">
-                                                            <td class="product-remove">
-                                                                <a title="Remove this item" class="remove" href="#">
-                                                                    <i class="fas fa-times"></i>
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-thumbnail">
-                                                                <a href="shop-product-sidebar-left.html">
-                                                                    <img width="100" height="100" alt="" class="img-fluid" src="{{asset('frontend/img/products/product-grey-2.jpg')}}">
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-name">
-                                                                <a href="shop-product-sidebar-left.html">Golf Bag</a>
-                                                            </td>
-                                                            <td class="product-price">
-                                                                <span class="amount">$72</span>
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                <form enctype="multipart/form-data" method="post" class="cart">
-                                                                    <div class="quantity">
-                                                                        <input type="button" class="minus" value="-">
-                                                                        <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                                                        <input type="button" class="plus" value="+">
-                                                                    </div>
-                                                                </form>
-                                                            </td>
-                                                            <td class="product-subtotal">
-                                                                <span class="amount">$72</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="cart_table_item">
-                                                            <td class="product-remove">
-                                                                <a title="Remove this item" class="remove" href="#">
-                                                                    <i class="fas fa-times"></i>
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-thumbnail">
-                                                                <a href="shop-product-sidebar-left.html">
-                                                                    <img width="100" height="100" alt="" class="img-fluid" src="{{asset('frontend/img/products/product-grey-3.jpg')}}">
-                                                                </a>
-                                                            </td>
-                                                            <td class="product-name">
-                                                                <a href="shop-product-sidebar-left.html">Workout</a>
-                                                            </td>
-                                                            <td class="product-price">
-                                                                <span class="amount">$60</span>
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                <form enctype="multipart/form-data" method="post" class="cart">
-                                                                    <div class="quantity">
-                                                                        <input type="button" class="minus" value="-">
-                                                                        <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                                                        <input type="button" class="plus" value="+">
-                                                                    </div>
-                                                                </form>
-                                                            </td>
-                                                            <td class="product-subtotal">
-                                                                <span class="amount">$60</span>
-                                                            </td>
-                                                        </tr>
+
+                                                        @foreach(App\Models\Cart::totalCarts() as $cart)
+                                                            <tr class="cart_table_item">
+                                                                <td class="product-remove">
+                                                                    <form action="{{ route('cart.delete', $cart->id) }}" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" title="Remove this item" class="remove">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    
+                                                                </td>
+                                                                <td class="product-thumbnail">
+                                                                    <a href="shop-product-sidebar-left.html">
+                                                                        <img width="100" height="100" alt="" class="img-fluid" src="{{asset('frontend/img/products/product-grey-1.jpg')}}">
+                                                                    </a>
+                                                                </td>
+                                                                <td class="product-name">
+                                                                    <a href="shop-product-sidebar-left.html">{{ $cart->product->title }}</a>
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    <span class="amount">$299</span>
+                                                                </td>
+                                                                <td class="product-quantity">
+                                                                    <form enctype="multipart/form-data" method="post" class="cart">
+                                                                        <div class="quantity">
+                                                                            <input type="button" class="minus" value="-">
+                                                                            <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                                                            <input type="button" class="plus" value="+">
+                                                                        </div>
+                                                                    </form>
+                                                                </td>
+                                                                <td class="product-subtotal">
+                                                                    <span class="amount">$299</span>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                         <tr>
                                                             <td class="actions" colspan="6">
                                                                 <div class="actions-continue">
@@ -144,8 +97,10 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+
                                                     </tbody>
                                                 </table>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>

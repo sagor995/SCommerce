@@ -120,7 +120,7 @@
                                         @endif
                                     </div>
                                     <div class="actions">
-                                        <a class="btn btn-dark" href="#">View Cart</a>
+                                        <a class="btn btn-dark" href="{{ route('cart.manage') }}">View Cart</a>
                                         <a class="btn btn-primary" href="#">Checkout</a>
                                     </div>
                                 </div>
