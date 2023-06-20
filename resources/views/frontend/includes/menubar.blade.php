@@ -95,19 +95,29 @@
                                                 <p class="qty-price">
                                                     {{$cart->quantity}} X 
                                                     @if(!is_null($cart->product->offer_price))
-                                                        <span class="price">{{$cart->product->offer_price}}</span>
+                                                        <span class="price">{{$cart->product->offer_price}} BDT</span>
                                                     @else
-                                                        <span class="price">{{$cart->product->regular_price}}</span>
+                                                        <span class="price">{{$cart->product->regular_price}} BDT</span>
                                                     @endif
                                                 </p>
-                                                <a href="#" title="Remove This Item" class="btn-remove"><i class="fas fa-times"></i></a>
+                                                <form action="{{ route('cart.delete', $cart->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" title="Remove This Item" class="btn-remove">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </form>
+                                                
                                             </div>
                                         </li>
                                         @endforeach
                                     </ol>
                                     <div class="totals">
-                                        <span class="label">Total:</span>
-                                        <span class="price-total"><span class="price">{{ App\Models\Cart::totalItemsPrice() }} BDT</span></span>
+                                        @if(App\Models\Cart::totalItemsPrice() == 0)
+                                            <span class="label">Your cart is currently empty</span>
+                                        @else
+                                            <span class="label">Total:</span>
+                                            <span class="price-total"><span class="price">{{ App\Models\Cart::totalItemsPrice() }} BDT</span></span>
+                                        @endif
                                     </div>
                                     <div class="actions">
                                         <a class="btn btn-dark" href="#">View Cart</a>

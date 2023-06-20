@@ -46,8 +46,15 @@ class CartController extends Controller
             $cart->quantity         = $request->quantity;
             $cart->save();
         }
+
+        $notification = array(
+            'message' => 'Item Added to Cart',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
         
-        return back();
+        //return back();
 
     }
 
@@ -65,5 +72,18 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         //
+        $cart = Cart::find($id);
+
+        if(!is_null($cart)){
+
+            $cart->delete();
+
+            $notification = array(
+                'message' => 'Item Removed',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
     }
 }

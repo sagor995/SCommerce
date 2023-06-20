@@ -30,6 +30,52 @@
 <!-- Theme Initialization Files -->
 <script src="{{asset('frontend/js/theme.init.js')}}"></script>
 
+<!-- Toastr Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+<script type="text/javascript">
+    @if(Session::has('message'))
+
+    //Define and make default alert-type
+    var type = "{{ Session::get('alert-type','info') }}";
+
+    switch (type) {
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+
+    @endif
+</script>
+
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

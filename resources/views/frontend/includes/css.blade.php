@@ -29,3 +29,6 @@
 
 <!-- Head Libs -->
 <script src="{{asset('frontend/vendor/modernizr/modernizr.min.js')}}"></script>
+
+<!-- Toastr Css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
