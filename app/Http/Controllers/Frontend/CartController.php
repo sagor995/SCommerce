@@ -84,7 +84,9 @@ class CartController extends Controller
                 'alert-type' => 'error'
             );
 
-            return redirect()->back()->with($notification);
+            return redirect()->back();
         }
     }
+
+    
 }

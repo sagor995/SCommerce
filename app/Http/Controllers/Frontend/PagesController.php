@@ -115,4 +115,10 @@ class PagesController extends Controller
         //
         return view("frontend.pages.customer-dashboard.myaccount");
     }
+
+    public function checkout()
+    {
+        //
+        return view("frontend.pages.checkout");
+    }
 }

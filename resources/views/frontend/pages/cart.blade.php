@@ -22,8 +22,7 @@
                                 <div class="col">
                                     <div class="featured-box featured-box-primary text-left mt-2">
                                         <div class="box-content">
-                                            <form method="post" action="">
-
+                                        
                                                 @if(App\Models\Cart::totalItems() == 0)
                                                     <div class="alert alert-info">
                                                         You have no items in your cart!. Let's go buy something.
@@ -57,12 +56,15 @@
                                                         @foreach(App\Models\Cart::totalCarts() as $cart)
                                                             <tr class="cart_table_item">
                                                                 <td class="product-remove">
+                                                                    
                                                                     <form action="{{ route('cart.delete', $cart->id) }}" method="POST">
                                                                         @csrf
-                                                                        <button type="submit" title="Remove this item" class="remove">
+                                                                        <button type="submit" title="Remove This Item" id="cremove" class="btn-remove">
                                                                             <i class="fas fa-times"></i>
                                                                         </button>
                                                                     </form>
+
+                                                                  
                                                                     
                                                                 </td>
                                                                 <td class="product-thumbnail">
@@ -74,34 +76,40 @@
                                                                     <a href="shop-product-sidebar-left.html">{{ $cart->product->title }}</a>
                                                                 </td>
                                                                 <td class="product-price">
-                                                                    <span class="amount">$299</span>
+                                                                    <span class="amount">
+                                                                    @if(!is_null($cart->product->offer_price))
+                                                                        {{$cart->product->offer_price}}
+                                                                    @else
+                                                                        {{$cart->product->regular_price}}
+                                                                    @endif
+                                                                    </span>
                                                                 </td>
                                                                 <td class="product-quantity">
                                                                     <form enctype="multipart/form-data" method="post" class="cart">
                                                                         <div class="quantity">
                                                                             <input type="button" class="minus" value="-">
-                                                                            <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                                                            <input type="text" class="input-text qty text" title="Qty" value="{{$cart->quantity}}" name="quantity" min="1" step="1">
                                                                             <input type="button" class="plus" value="+">
                                                                         </div>
                                                                     </form>
                                                                 </td>
                                                                 <td class="product-subtotal">
-                                                                    <span class="amount">$299</span>
+                                                                    <span class="amount">
+                                                                    @if(!is_null($cart->product->offer_price))
+                                                                        {{ $cart->quantity * $cart->product->offer_price}}
+                                                                    @else
+                                                                        {{ $cart->quantity * $cart->product->regular_price}}
+                                                                    @endif
+                                                                    </span>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
-                                                            <td class="actions" colspan="6">
-                                                                <div class="actions-continue">
-                                                                    <input type="submit" value="Update Cart" name="update_cart" class="btn btn-xl btn-light pr-4 pl-4 text-2 font-weight-semibold text-uppercase">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        
 
                                                     </tbody>
                                                 </table>
                                                 @endif
-                                            </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +162,13 @@
                                                             <strong class="text-dark">Cart Subtotal</strong>
                                                         </th>
                                                         <td>
-                                                            <strong class="text-dark"><span class="amount">$431</span></strong>
+                                                            <strong class="text-dark"><span class="amount">
+                                                                @if(App\Models\Cart::totalItemsPrice()==0)
+                                                                    0 BDT
+                                                                @else
+                                                                    {{App\Models\Cart::totalItemsPrice()}} BDT
+                                                                @endif
+                                                            </span></strong>
                                                         </td>
                                                     </tr>
                                                     <tr class="shipping">
@@ -170,7 +184,13 @@
                                                             <strong class="text-dark">Order Total</strong>
                                                         </th>
                                                         <td>
-                                                            <strong class="text-dark"><span class="amount">$431</span></strong>
+                                                            <strong class="text-dark"><span class="amount">
+                                                                @if(App\Models\Cart::totalItemsPrice()==0)
+                                                                    0 BDT
+                                                                @else
+                                                                    {{App\Models\Cart::totalItemsPrice()}} BDT
+                                                                @endif
+                                                            </span></strong>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -185,7 +205,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="actions-continue">
-                                    <button type="submit" class="btn btn-primary btn-modern text-uppercase">Proceed to Checkout <i class="fas fa-angle-right ml-1"></i></button>
+                                    <a href="{{route('checkout')}}" class="btn btn-primary btn-modern text-uppercase">Proceed to Checkout 
+                                        <i class="fas fa-angle-right ml-1"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

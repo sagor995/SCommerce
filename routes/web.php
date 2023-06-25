@@ -55,7 +55,6 @@ Route::group(['prefix'=>'/cart'], function(){
 });
 
 
-
 //Checkout
 Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
 
