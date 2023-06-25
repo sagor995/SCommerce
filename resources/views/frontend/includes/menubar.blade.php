@@ -30,17 +30,37 @@
                                     <li class="nav-item nav-item-anim-icon d-none d-md-block">
                                         <a class="nav-link" href="contact-us.html"><i class="fas fa-angle-right"></i> Contact Us</a>
                                     </li>
-                                    <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
-                                        <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="img/blank.gif" class="flag flag-us" alt="English" /> English
-                                            <i class="fas fa-angle-down"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
-                                            <a class="dropdown-item" href="#"><img src="img/blank.gif" class="flag flag-us" alt="English" /> English</a>
-                                            <a class="dropdown-item" href="#"><img src="img/blank.gif" class="flag flag-es" alt="English" /> Español</a>
-                                            <a class="dropdown-item" href="#"><img src="img/blank.gif" class="flag flag-fr" alt="English" /> Française</a>
-                                        </div>
-                                    </li>
+                                    <!-- auth()->check() -->
+                                    @if(Auth::check())
+                                        <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
+                                            <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="{{asset('frontend/img/default.png')}}" width="20px" alt="Customer Logo" /> {{ Auth::user()->name }}
+                                                <i class="fas fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                                                <a class="dropdown-item" href="#">My Dashboard</a>
+                                                <a class="dropdown-item" href="#">Order History</a>
+                                                <!-- <a class="dropdown-item" href="#">Logout</a> -->
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                                                                        this.closest('form').submit();">
+                                                        <i class='bx bx-log-out-circle'></i>
+                                                        <span>Logout</span>
+                                                    </a>
+                                                </form>
+
+                                            </div>
+                                        </li>    
+                                    @else
+                                        <li class="nav-item nav-item-anim-icon d-none d-md-block">
+                                            <a class="nav-link" href="{{ route('userLogin') }}"><i class="fas fa-angle-right"></i> Login / Register</a>
+                                        </li>
+                                    @endif
+
+                                    
+
+                                    
                                 </ul>
                             </nav>
                         </div>

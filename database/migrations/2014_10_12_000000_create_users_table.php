@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('address_line2')->nullable();
             $table->integer('division_id')->nullable();
             $table->integer('district_id')->nullable();
+            $table->string('country_name')->nullable();
+            $table->string('zipCode')->nullable();
             $table->text('image')->nullable();
             $table->integer('is_admin')->default(2)->comment('1=admin, 2=customner');
             $table->rememberToken();
