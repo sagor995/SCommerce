@@ -38,7 +38,7 @@
                                                 <i class="fas fa-angle-down"></i>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
-                                                <a class="dropdown-item" href="#">My Dashboard</a>
+                                                <a class="dropdown-item" href="{{route('customerDashboard')}}">My Dashboard</a>
                                                 <a class="dropdown-item" href="#">Order History</a>
                                                 <!-- <a class="dropdown-item" href="#">Logout</a> -->
                                                 <form method="POST" action="{{ route('logout') }}">
