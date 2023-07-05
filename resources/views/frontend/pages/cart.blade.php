@@ -63,9 +63,7 @@
                                                                             <i class="fas fa-times"></i>
                                                                         </button>
                                                                     </form>
-
-                                                                  
-                                                                    
+ 
                                                                 </td>
                                                                 <td class="product-thumbnail">
                                                                     <a href="shop-product-sidebar-left.html">
@@ -205,9 +203,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="actions-continue">
+                                    
                                     <a href="{{route('checkout')}}" class="btn btn-primary btn-modern text-uppercase">Proceed to Checkout 
                                         <i class="fas fa-angle-right ml-1"></i>
                                     </a>
+
                                 </div>
                             </div>
                         </div>

@@ -106,19 +106,50 @@ class PagesController extends Controller
         //
         return view("frontend.pages.auth-user.login");
     }
+    
 
     /**
      * Display a listing of the resource.
      */
     public function customerDashboard()
     {
-        //
-        return view("frontend.pages.customer-dashboard.myaccount");
+        $districts = District::orderBy('division_id','asc')->where('status',1)->get();
+        $divisions = Division::orderBy('priority_number','asc')->where('status',1)->get();
+        return view("frontend.pages.customer-dashboard.myaccount" , compact('districts','divisions'));
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateProfile(User $user, Request $request)
+    {   
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address_line1' => $request->address_line1,
+            'address_line2' => $request->address_line2,
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'country_name' => $request->country_name,
+            'zipCode' => $request->zipCode
+        ]);
+
+        $notification = array(
+            'message' => 'Profile updated successfully!',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->route('customerDashboard')->with($notification);
+    }
+
+    
+    
 
     public function checkout()
     {
-        //
-        return view("frontend.pages.checkout");
+        $districts = District::orderBy('division_id','asc')->where('status',1)->get();
+        $divisions = Division::orderBy('priority_number','asc')->where('status',1)->get();
+        return view("frontend.pages.checkout", compact('districts','divisions'));
     }
 }

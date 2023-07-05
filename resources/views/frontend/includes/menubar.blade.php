@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="actions">
                                         <a class="btn btn-dark" href="{{ route('cart.manage') }}">View Cart</a>
-                                        <a class="btn btn-primary" href="#">Checkout</a>
+                                        <a class="btn btn-primary" href="{{route('checkout')}}">Checkout</a>
                                     </div>
                                 </div>
                             </div>

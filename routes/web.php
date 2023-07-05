@@ -14,6 +14,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\DivisionController;
 use App\Http\Controllers\Backend\DistrictController;
 
+//use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,9 @@ Route::get('/product-details/{slug}', [PagesController::class, "pdetails"])->nam
 
 //User Auth Pages
 Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');
-Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->name('customerDashboard');
+Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->middleware(['auth', 'verified'])->name('customerDashboard');
+Route::post('/update-profile/{user}', [PagesController::class, "updateProfile"])->name('cprofileUpdate');
+//Route::get('/customer-dashboard', [ProfileController::class, "edit"])->name('customerDashboard');
 
 //Cart
 Route::group(['prefix'=>'/cart'], function(){
@@ -56,7 +60,7 @@ Route::group(['prefix'=>'/cart'], function(){
 
 
 //Checkout
-Route::get('/checkout', [PagesController::class, "checkout"])->name('checkout');
+Route::get('/checkout', [PagesController::class, "checkout"])->middleware(['auth', 'verified'])->name('checkout');
 
 /*
 |--------------------------------------------------------------------------

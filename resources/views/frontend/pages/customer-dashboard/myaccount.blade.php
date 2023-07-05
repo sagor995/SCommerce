@@ -39,7 +39,8 @@
                     <div class="d-flex justify-content-center mb-4">
                         <div class="profile-image-outer-container">
                             <div class="profile-image-inner-container bg-color-primary">
-                                <img src="{{asset('frontend/img/avatars/avatar.jpg')}}">
+                            <!-- frontend/img/avatars/avatar.jpg -->
+                                <img src="{{Auth::user()->image ? asset('frontend/img/Auth::user()->image') : asset('frontend/img/default.png')}}" alt="User Image">
                                 <span class="profile-image-button bg-color-dark">
                                     <i class="fas fa-camera text-light"></i>
                                 </span>
@@ -50,7 +51,7 @@
 
                     <aside class="sidebar mt-2" id="sidebar">
                         <ul class="nav nav-list flex-column mb-5">
-                            <li class="nav-item"><a class="nav-link text-dark active" href="#">My Profile</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark active" href="{{route('customerDashboard')}}">My Profile</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">User Preferences</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Billing</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Invoices</a></li>
@@ -64,56 +65,85 @@
                         <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">My</strong> Profile</h2>
                     </div>
                     <div class="overflow-hidden mb-4 pb-3">
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p class="mb-0">Manage your profile data</p>
                     </div>
 
-                    <form role="form" class="needs-validation">
-                        <div class="form-group row">
+                    <form action="{{ route('cprofileUpdate',auth()->id()) }}" role="form" class="needs-validation" method="POST" novalidate>
+                        @csrf
+                        <!-- <div class="form-group row">
                             <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">First name</label>
                             <div class="col-lg-9">
                                 <input class="form-control" required type="text" value="John">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Last name</label>
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Full name</label>
                             <div class="col-lg-9">
-                                <input class="form-control" required type="text" value="Doe">
+                                <input class="form-control" type="name" name="name" id="name" value="{{Auth::user()->name}}"
+                                autocomplete="off" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Email</label>
                             <div class="col-lg-9">
-                                <input class="form-control" required type="email" value="email@gmail.com">
+                                <input class="form-control" type="email" name="email" id="email" value="{{Auth::user()->email}}" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Company</label>
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Phone</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="phone" id="phone" 
+                                value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" placeholder="Update your phone number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Address Line 1</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="address_line1" id="address_line1" 
+                                value="{{ Auth::user()->address_line1 ? Auth::user()->address_line1 : '' }}" placeholder="Update your address line 1">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Website</label>
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Address Line 2</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
+                                <input class="form-control" type="text" name="address_line2" id="address_line2"
+                                value="{{ Auth::user()->address_line2 ? Auth::user()->address_line2 : '' }}" placeholder="Address Line 2">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
+                            <div class="col-lg-4">
+                                <select class="form-control" size="0" id="district_id"  name="district_id" >
+                                    <option>Please Select the District</option>
+                                    @foreach($districts as $district)
+                                        <option value="{{$district->id}}"
+                                        @if($district->id == Auth::user()->district_id) selected @endif>{{ $district->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
+                            <div class="col-lg-5">
+                                <select class="form-control" size="0" id="division_id"  name="division_id" >
+                                    <option>Please Select the Division</option>
+                                    @foreach($divisions as $division)
+                                        <option value="{{$division->id}}"
+                                        @if($division->id == Auth::user()->division_id) selected @endif>{{ $division->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2"></label>
+                            <div class="col-lg-4">
+                                <input class="form-control" type="text" name="zipCode" id="zipCode" 
+                                value="{{ Auth::user()->zipCode ? Auth::user()->zipCode : '' }}" placeholder="Zip Code">
+                            </div>
+                            <div class="col-lg-5">
+                            <input class="form-control" type="text" name="country_name" id="country_name"
+                                value="{{ Auth::user()->country_name ? Auth::user()->country_name : '' }}" placeholder="Country Name">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
                             <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Time Zone</label>
                             <div class="col-lg-9">
                                 <select id="user_time_zone" class="form-control" size="0">
@@ -127,23 +157,42 @@
                                     <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
+                            <div class="form-group col-lg-9">
+
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <input type="submit" value="Update Details" class="btn btn-primary btn-modern float-right" data-loading-text="Loading...">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="overflow-hidden mb-4 pb-3">
+                        <p class="mb-0">Change your current password: </p>
+                    </div>
+
+                    <form role="form" class="needs-validation" method="POST">
+                        <!-- <div class="form-group row">
                             <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Username</label>
                             <div class="col-lg-9">
                                 <input class="form-control" required type="text" value="">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Password</label>
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required"
+                            for="password" >Password</label>
                             <div class="col-lg-9">
-                                <input class="form-control" required type="password" value="">
+                                <input class="form-control" type="password" name="password" id="password" value=""
+                                placeholder="Enter new password" required autocomplete="new-password">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Confirm password</label>
+                            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required"
+                            for="password_confirmation">Confirm password</label>
                             <div class="col-lg-9">
-                                <input class="form-control" required type="password" value="">
+                                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value=""
+                                placeholder="Confirm password" required autocomplete="new-password">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -151,7 +200,7 @@
 
                             </div>
                             <div class="form-group col-lg-3">
-                                <input type="submit" value="Save" class="btn btn-primary btn-modern float-right" data-loading-text="Loading...">
+                                <input type="submit" value="Update Password" class="btn btn-primary btn-modern float-right" data-loading-text="Loading...">
                             </div>
                         </div>
                     </form>
