@@ -38,80 +38,87 @@
                                 <div id="collapseOne" class="collapse show">
                                     <div class="card-body">
                                         <form action="/" id="frmBillingAddress" method="post">
-                                            <div class="form-row">
-                                                <div class="form-group col">
-                                                    <label class="font-weight-bold text-dark text-2">Country</label>
-                                                    <input class="form-control" type="text" name="country_name" id="country_name" placeholder="Country Name"
-                                                    value="{{ Auth::user()->country_name ? Auth::user()->country_name : '' }}" required>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="form-row">
                                                 <div class="form-group col">
                                                     <label class="font-weight-bold text-dark text-2">Full Name</label>
                                                     <input type="name" name="name" id="name" value="{{ Auth::user()->name ? Auth::user()->name : '' }}"
-                                                     class="form-control" required>
+                                                     class="form-control" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col">
                                                     <label class="font-weight-bold text-dark text-2">Email</label>
                                                     <input type="email" name="email" id="email" value="{{ Auth::user()->email ? Auth::user()->email : '' }}"
-                                                     class="form-control" required>
+                                                     class="form-control" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col">
                                                     <label class="font-weight-bold text-dark text-2">Phone</label>
                                                     <input type="text" name="phone" id="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}"
-                                                    class="form-control" placeholder="Enter Your Phone Number" required>
+                                                    class="form-control" placeholder="Enter Your Phone Number" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col">
                                                     <label class="font-weight-bold text-dark text-2">Address Line 1 </label>
                                                     <input type="text" name="address_line1" id="address_line1" placeholder="Address line 1"
-                                                     value="{{ Auth::user()->address_line1 ? Auth::user()->address_line1 : '' }}" class="form-control">
+                                                     value="{{ Auth::user()->address_line1 ? Auth::user()->address_line1 : '' }}" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col">
                                                     <label class="font-weight-bold text-dark text-2">Address Line 2 </label>
                                                     <input type="text" name="address_line2" id="address_line2" placeholder="Address line 2"
-                                                     value="{{ Auth::user()->address_line2 ? Auth::user()->address_line2 : '' }}" class="form-control">
+                                                     value="{{ Auth::user()->address_line2 ? Auth::user()->address_line2 : '' }}" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-lg-6">
                                                     <label class="font-weight-bold text-dark text-2">District</label>
-                                                    <select class="form-control" size="0" id="district_id"  name="district_id" >
+                                                    @foreach($districts as $district)
+                                                        @if($district->id == Auth::user()->district_id)
+                                                            <input type="text" name="district_id" id="district_id" placeholder=""
+                                                            value="{{ $district->name }}" class="form-control" readonly>
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    <!-- <select class="form-control" size="0" id="district_id"  name="district_id" >
                                                         <option>Please Select the District</option>
                                                         @foreach($districts as $district)
                                                             <option value="{{$district->id}}"
-                                                            @if($district->id == Auth::user()->district_id) selected @endif>{{ $district->name }}</option>
+                                                            @if($district->id == Auth::user()->district_id) selected @endif></option>
                                                         @endforeach
-                                                    </select>
+                                                    </select> -->
                                                 </div>
                                                 <div class="form-group col-lg-6">
                                                     <label class="font-weight-bold text-dark text-2">Division</label>
-                                                    <select class="form-control" size="0" id="division_id"  name="division_id" >
+                                                    @foreach($divisions as $division)
+                                                        @if($division->id == Auth::user()->division_id)
+                                                            <input type="text" name="division_id" id="division_id" placeholder=""
+                                                            value="{{ $division->name }}" class="form-control" readonly>
+                                                        @endif
+                                                    @endforeach
+                                                    <!-- <select class="form-control" size="0" id="division_id"  name="division_id" >
                                                         <option>Please Select the Division</option>
                                                         @foreach($divisions as $division)
                                                             <option value="{{$division->id}}"
                                                             @if($division->id == Auth::user()->division_id) selected @endif>{{ $division->name }}</option>
                                                         @endforeach
-                                                    </select>
+                                                    </select> -->
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-lg-6">
                                                     <label class="font-weight-bold text-dark text-2">Zip Code</label>
                                                     <input class="form-control" type="text" name="zipCode" id="zipCode" 
-                                                    value="{{ Auth::user()->zipCode ? Auth::user()->zipCode : '' }}" placeholder="Zip Code">
+                                                    value="{{ Auth::user()->zipCode ? Auth::user()->zipCode : '' }}" placeholder="Zip Code" readonly>
                                                 </div>
                                                 <div class="form-group col-lg-6">
                                                     <label class="font-weight-bold text-dark text-2">Country</label>
                                                     <input class="form-control" type="text" name="country_name" id="country_name"
-                                                    value="{{ Auth::user()->country_name ? Auth::user()->country_name : '' }}" placeholder="Country Name">
+                                                    value="{{ Auth::user()->country_name ? Auth::user()->country_name : '' }}" placeholder="Country Name" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -142,13 +149,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col">
-                                                    <label class="font-weight-bold text-dark text-2">Country</label>
-                                                    <input class="form-control" type="text" name="country_name" id="country_name" placeholder="Country Name"
-                                                    value="{{ Auth::user()->country_name ? Auth::user()->country_name : '' }}" required>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="form-row">
                                                 <div class="form-group col-lg">
                                                     <label class="font-weight-bold text-dark text-2">Full Name</label>
