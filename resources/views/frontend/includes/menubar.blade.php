@@ -34,7 +34,12 @@
                                     @if(Auth::check())
                                         <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
                                             <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="{{asset('frontend/img/default.png')}}" width="20px" alt="Customer Logo" /> {{ Auth::user()->name }}
+                                               
+                                                @if( !is_null(Auth::user()->image) )
+                                                    <img src="{{ asset('images/users/') }}/{{Auth::user()->image}}"  width="20px" alt="Customer Logo"> {{ Auth::user()->name }}
+                                                @else
+                                                    <img src="{{asset('images/users/default.png')}}"  width="20px" alt="Customer Logo"> {{ Auth::user()->name }}
+                                                @endif
                                                 <i class="fas fa-angle-down"></i>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownLanguage">

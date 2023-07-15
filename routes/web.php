@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 //FrontEnd
 use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CustomerController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
@@ -46,8 +47,9 @@ Route::get('/product-details/{slug}', [PagesController::class, "pdetails"])->nam
 
 //User Auth Pages
 Route::get('/user-login', [PagesController::class, "userLogin"])->name('userLogin');
-Route::get('/customer-dashboard', [PagesController::class, "customerDashboard"])->middleware(['auth', 'verified'])->name('customerDashboard');
-Route::post('/update-profile/{user}', [PagesController::class, "updateProfile"])->name('cprofileUpdate');
+Route::get('/customer-dashboard', [CustomerController::class, "index"])->middleware(['verified'])->name('customerDashboard');
+Route::post('/customer-dashboard/update/{id}', [CustomerController::class, "update"])->name('customerDashboardUpdate');
+// Route::post('/update-profile/{user}', [PagesController::class, "updateProfile"])->name('cprofileUpdate');
 //Route::get('/customer-dashboard', [ProfileController::class, "edit"])->name('customerDashboard');
 
 //Cart

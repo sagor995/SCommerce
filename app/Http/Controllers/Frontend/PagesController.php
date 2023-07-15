@@ -107,17 +107,6 @@ class PagesController extends Controller
         return view("frontend.pages.auth-user.login");
     }
     
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function customerDashboard()
-    {
-        $districts = District::orderBy('division_id','asc')->where('status',1)->get();
-        $divisions = Division::orderBy('priority_number','asc')->where('status',1)->get();
-        return view("frontend.pages.customer-dashboard.myaccount" , compact('districts','divisions'));
-    }
-
     /**
      * Update the specified resource in storage.
      */
