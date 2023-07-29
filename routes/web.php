@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CustomerController;
+use App\Http\Controllers\SslCommerzPaymentController;
 
 //Backend
 use App\Http\Controllers\Backend\DashboardController;
@@ -53,7 +54,7 @@ Route::post('/customer-dashboard/update/{id}', [CustomerController::class, "upda
 //Route::get('/customer-dashboard', [ProfileController::class, "edit"])->name('customerDashboard');
 
 //Cart
-Route::group(['prefix'=>'/cart'], function(){
+Route::group(['prefix' => '/cart'], function () {
     Route::get('/', [CartController::class, "index"])->name('cart.manage');
     Route::post('/store', [CartController::class, "store"])->name('cart.store');
     Route::post('/update/{id}', [CartController::class, "update"])->name('cart.update');
@@ -63,6 +64,22 @@ Route::group(['prefix'=>'/cart'], function(){
 
 //Checkout
 Route::get('/checkout', [PagesController::class, "checkout"])->middleware(['auth', 'verified'])->name('checkout');
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('makePayment');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +93,7 @@ Route::get('/checkout', [PagesController::class, "checkout"])->middleware(['auth
 */
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'verified','isAdmin'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.dashboard');
 
     Route::group(['prefix' => '/brand'], function () {
         Route::get('/manage', [BrandController::class, "index"])->name('brand.manage');
@@ -129,4 +146,4 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

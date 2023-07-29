@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <!-- Start Checkout form -->
-                <form action="/" method="POST" id="frmBillingAddress">
+                <form action="{{ route('makePayment') }}" method="POST" id="frmBillingAddress" class="needs-validation">
                     @csrf
                     <div class="accordion accordion-modern" id="accordion">
                         <div class="card card-default">
@@ -43,8 +43,11 @@
 
                                     <div class="form-row">
                                         <div class="form-group col-lg-6">
-                                            <label class="font-weight-bold text-dark text-2" require>Full Name</label>
+                                            <label for="name" class="font-weight-bold text-dark text-2" require>Full Name</label>
                                             <input type="name" name="name" id="name" value="{{ Auth::user()->name ? Auth::user()->name : '' }}" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                Valid your name.
+                                            </div>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label class="font-weight-bold text-dark text-2">Email</label>
@@ -203,7 +206,7 @@
                                                 <input type="submit" value="Continue" class="btn btn-xl btn-light pr-4 pl-4 text-2 font-weight-semibold text-uppercase float-right mb-2" data-loading-text="Loading...">
                                             </div>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>-->
