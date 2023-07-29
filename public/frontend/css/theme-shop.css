@@ -11,6 +11,7 @@ Theme Version:	8.0.0
 	font-weight: normal;
 	font-style: normal;
 }
+
 /* Shop - Base */
 .shop .products:after {
 	content: ".";
@@ -44,7 +45,8 @@ Theme Version:	8.0.0
 	transform: translate3d(0, 0, 0);
 }
 
-.shop .products .product .add-to-cart-product [class*="fa-"], .shop .products .product .add-to-cart-product .icons {
+.shop .products .product .add-to-cart-product [class*="fa-"],
+.shop .products .product .add-to-cart-product .icons {
 	margin-right: 3px;
 	font-size: 1.1em;
 }
@@ -149,7 +151,7 @@ Theme Version:	8.0.0
 	padding: 0;
 }
 
-.product-info + .product-info {
+.product-info+.product-info {
 	margin-top: -5px;
 }
 
@@ -193,7 +195,8 @@ Theme Version:	8.0.0
 	font-weight: 100;
 }
 
-.product-info .product-info-act-left, .product-info .product-info-act-right {
+.product-info .product-info-act-left,
+.product-info .product-info-act-right {
 	float: left;
 	overflow: hidden;
 }
@@ -415,7 +418,8 @@ Theme Version:	8.0.0
 	border-radius: .25rem;
 }
 
-.shop .quantity .qty::-webkit-inner-spin-button, .shop .quantity .qty::-webkit-outer-spin-button {
+.shop .quantity .qty::-webkit-inner-spin-button,
+.shop .quantity .qty::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
@@ -499,7 +503,7 @@ Theme Version:	8.0.0
 }
 
 .shop table.cart .product-name {
-	width: 60%;
+	width: 50%;
 }
 
 .shop table.cart .quantity {
@@ -515,7 +519,8 @@ Theme Version:	8.0.0
 	width: 100%;
 }
 
-.shop .cart-totals th, .shop .cart-totals td {
+.shop .cart-totals th,
+.shop .cart-totals td {
 	border-top: 1px solid rgba(0, 0, 0, 0.06);
 	padding: 8px 10px;
 }
@@ -580,7 +585,7 @@ Theme Version:	8.0.0
 	padding: 0;
 }
 
-.product-thumb-info + .product-thumb-info {
+.product-thumb-info+.product-thumb-info {
 	margin-top: -5px;
 }
 
@@ -701,7 +706,7 @@ Theme Version:	8.0.0
 		display: none !important;
 	}
 
-	#header nav.mega-menu .mega-menu-shop > ul.dropdown-menu {
+	#header nav.mega-menu .mega-menu-shop>ul.dropdown-menu {
 		display: none !important;
 	}
 }
@@ -711,7 +716,11 @@ Theme Version:	8.0.0
 		width: 65%;
 	}
 
-	.shop table.cart th.product-price, .shop table.cart td.product-price, .shop table.cart th.product-quantity, .shop table.cart td.product-quantity, .shop table.cart .product-thumbnail {
+	.shop table.cart th.product-price,
+	.shop table.cart td.product-price,
+	.shop table.cart th.product-quantity,
+	.shop table.cart td.product-quantity,
+	.shop table.cart .product-thumbnail {
 		display: none;
 	}
 }

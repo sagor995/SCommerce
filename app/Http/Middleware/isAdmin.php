@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class isAdmin
 {
@@ -16,12 +16,12 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->is_admin == 1){
+        if (Auth::user()->is_admin == 1) {
             return $next($request);
-        }else{
+        } else if (Auth::user()->is_admin == 2) {
 
             $notification = array(
-                'message' => 'You are not allowed to access this page.',
+                'message' => 'You have no access the Admin page.',
                 'alert-type' => 'error'
             );
 

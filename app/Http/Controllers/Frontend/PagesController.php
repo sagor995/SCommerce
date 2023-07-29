@@ -10,9 +10,11 @@ use App\Models\Brand;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\District;
+use App\Models\Cart;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -70,7 +72,7 @@ class PagesController extends Controller
         return view("frontend.pages.static-pages.return-and-refund-policy");
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function toc()
@@ -84,7 +86,7 @@ class PagesController extends Controller
      */
     public function products()
     {
-        $products = Product::orderBy('id','desc')->where('status',1)->get();
+        $products = Product::orderBy('id', 'desc')->where('status', 1)->get();
         return view("frontend.pages.product.all-products", compact('products'));
     }
 
@@ -94,7 +96,7 @@ class PagesController extends Controller
      */
     public function pdetails($slug)
     {
-        $pdetails = Product::where('slug',$slug)->first();
+        $pdetails = Product::where('slug', $slug)->first();
         return view("frontend.pages.product.details", compact('pdetails'));
     }
 
@@ -106,12 +108,12 @@ class PagesController extends Controller
         //
         return view("frontend.pages.auth-user.login");
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
     public function updateProfile(User $user, Request $request)
-    {   
+    {
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -132,13 +134,13 @@ class PagesController extends Controller
         return redirect()->route('customerDashboard')->with($notification);
     }
 
-    
-    
+
+
 
     public function checkout()
     {
-        $districts = District::orderBy('division_id','asc')->where('status',1)->get();
-        $divisions = Division::orderBy('priority_number','asc')->where('status',1)->get();
-        return view("frontend.pages.checkout", compact('districts','divisions'));
+        $divisions = Division::orderBy('priority_number', 'asc')->where('status', 1)->get();
+        $districts = District::orderBy('division_id', 'asc')->where('status', 1)->get();
+        return view("frontend.pages.checkout", compact('districts', 'divisions'));
     }
 }
