@@ -17,7 +17,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        
+
         return view('frontend.pages.cart');
     }
 
@@ -27,20 +27,20 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //check if logged in or not with product in cart or not.
-        if(Auth::check()){
-            $cart = Cart::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->first();
-        }else{
-            $cart = Cart::where('ip_address', request()->ip())->where('product_id', $request->product_id)->first();
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->where('order_id', NULL)->first();
+        } else {
+            $cart = Cart::where('ip_address', request()->ip())->where('product_id', $request->product_id)->where('order_id', NULL)->first();
         }
 
         //If already exists in cart then.
-        if(!is_null($cart)){
+        if (!is_null($cart)) {
             $cart->increment('quantity');
-        }else{
+        } else {
             $cart = new Cart();
-            if(Auth::check()){
+            if (Auth::check()) {
                 $cart->user_id      = Auth::user()->id;
-            }else{
+            } else {
                 $cart->ip_address   = request()->ip();
             }
             $cart->product_id       = $request->product_id;
@@ -54,9 +54,7 @@ class CartController extends Controller
         );
 
         return redirect()->back()->with($notification);
-        
         //return back();
-
     }
 
     /**
@@ -75,7 +73,7 @@ class CartController extends Controller
         //
         $cart = Cart::find($id);
 
-        if(!is_null($cart)){
+        if (!is_null($cart)) {
 
             $cart->delete();
 
@@ -87,6 +85,4 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
-
-    
 }
