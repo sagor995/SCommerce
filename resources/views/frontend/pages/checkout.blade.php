@@ -60,6 +60,8 @@
                                             <input type="text" name="phone" id="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" class="form-control" placeholder="Enter Your Phone Number" required>
                                         </div>
                                     </div>
+                                    <input type="hidden" value="{{App\Models\Cart::totalItemsPrice()}}" name="amount">
+
                                     <div class="form-row">
                                         <div class="form-group col-lg-6">
                                             <label class="font-weight-bold text-dark text-2">Address Line 1 </label>
@@ -106,6 +108,7 @@
                                             <input class="form-control" type="text" name="zipCode" id="zipCode" value="{{ Auth::user()->zipCode ? Auth::user()->zipCode : '' }}" placeholder="Zip Code" required>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <!-- <input type="submit" value="Continue" class="btn btn-xl btn-light pr-4 pl-4 text-2 font-weight-semibold text-uppercase float-right mb-2" data-loading-text="Loading..."> -->

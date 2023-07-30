@@ -23,10 +23,11 @@ return new class extends Migration
             $table->string('country_name')->nullable();
             $table->string('zipCode')->nullable();
 
-            $table->integer('amount')->nullable();
-            $table->integer('transaction_id')->nullable();
+            $table->unsignedInteger('total_amount')->nullable();
+            $table->unsignedInteger('shipping_amount')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->string('currency')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
 
             $table->timestamps();
         });
