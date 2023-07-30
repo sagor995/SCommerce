@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 
 
 use App\Library\SslCommerz\SslCommerzNotification;
-use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\DivisionController;
-use App\Http\Controllers\Backend\DistrictController;
+use App\Models\Product;
+use App\Models\District;
+use App\Models\Division;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -87,6 +88,16 @@ class SslCommerzPaymentController extends Controller
                 'currency'              => $post_data['currency'],
                 'status'                => 'Pending',
             ]);
+
+
+        $order_id = DB::table('orders')
+            ->where('transaction_id', $post_data['tran_id'])
+            ->select('id')->first();
+
+        foreach (Cart::totalCarts() as $cart) {
+            $cart->order_id = $order_id->id;
+            $cart->save();
+        }
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
