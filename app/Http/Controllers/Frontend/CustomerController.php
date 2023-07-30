@@ -21,11 +21,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $divisions = Division::orderBy('priority_number','asc')->where('status',1)->get();
-            $districts = District::orderBy('division_id','asc')->where('status',1)->get();
-            return view("frontend.pages.customer-dashboard.myaccount" , compact('districts','divisions'));
-        }else{
+        if (Auth::check()) {
+            $divisions = Division::orderBy('priority_number', 'asc')->where('status', 1)->get();
+            $districts = District::orderBy('division_id', 'asc')->where('status', 1)->get();
+            return view("frontend.pages.customer-dashboard.myaccount", compact('districts', 'divisions'));
+        } else {
             return redirect()->route('userLogin');
         }
     }
@@ -36,8 +36,8 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::find($id);
-        
-        if(!is_null($user)){
+
+        if (!is_null($user)) {
             $user->name             = $request->name;
             $user->email            = $request->email;
             $user->phone            = $request->phone;
@@ -54,7 +54,7 @@ class CustomerController extends Controller
             if (File::exists('images/users/' . $user->image)) {
                 File::delete('images/users/' . $user->image);
             }
-            
+
             $image = $request->file('image');
             $img = time() . '-br.' . $image->getClientOriginalExtension();
             $location = public_path('images/users/' . $img);
@@ -71,8 +71,16 @@ class CustomerController extends Controller
             }
         } */
 
-        if($request->password == $request->password_confirmation){
-            $user->password = Hash::make($request->password);
+        if (!is_null($request->password)) {
+            if ($request->password == $request->password_confirmation) {
+                $user->password = Hash::make($request->password);
+            } else {
+                $notification = array(
+                    'message' => 'Password Not Matched.',
+                    'alert-type' => 'error'
+                );
+                return redirect()->route('customerDashboard')->with($notification);
+            }
         }
 
         $user->save();
