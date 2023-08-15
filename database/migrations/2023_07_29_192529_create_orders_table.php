@@ -22,13 +22,12 @@ return new class extends Migration
             $table->integer('district_id')->nullable();
             $table->string('country_name')->nullable();
             $table->string('zipCode')->nullable();
-
             $table->unsignedInteger('total_amount')->nullable();
             $table->unsignedInteger('shipping_amount')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('currency')->nullable();
             $table->string('status')->nullable();
-
+            $table->timestamp('order_date')->nullable();
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image as Image;
 use DB;
+use Carbon\Carbon;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -79,7 +80,7 @@ class SslCommerzPaymentController extends Controller
                 'district_id'           => $post_data['cus_district'],
                 'country_name'          => $post_data['cus_country'],
                 'zipCode'               => $post_data['cus_postcode'],
-
+                'order_date'            => Carbon::now(),
                 'total_amount'          => $post_data['total_amount'],
                 'shipping_amount'       => $post_data['shipping_amount'],
                 'transaction_id'        => $post_data['tran_id'],
@@ -190,9 +191,12 @@ class SslCommerzPaymentController extends Controller
         #Check order status in order tabel against the transaction id or order id.
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'total_amount')->first();
+            ->first();
 
-        return view('frontend.pages.order.invoice', compact('order_details'));
+        $district = District::where('id', $order_details->district_id)->first();
+        $division = Division::where('id', $order_details->division_id)->first();
+
+        return view('frontend.pages.order.invoice', compact('order_details', 'district', 'division'));
         // if ($order_details->status == 'Pending') {
         //     $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 

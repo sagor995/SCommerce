@@ -44,8 +44,8 @@
                                     <div class="col-sm-6 invoice-id">
                                         <div class="info">
                                             <h1 class="color-white inv-header-1">Invoice</h1>
-                                            <p class="color-white mb-1">Invoice Number <span>#45613</span></p>
-                                            <p class="color-white mb-0">Invoice Date <span>21 Sep 2021</span></p>
+                                            <p class="color-white mb-1">Invoice Number <span>#{{$order_details->id}}</span></p>
+                                            <p class="color-white mb-0">Invoice Date <span>#{{$order_details->order_date}}</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -55,11 +55,13 @@
                                     <div class="col-sm-6">
                                         <div class="invoice-number mb-30">
                                             <h4 class="inv-title-1">Invoice To</h4>
-                                            <h2 class="name mb-10">Jhon Smith</h2>
+                                            <h2 class="name mb-10">{{$order_details->name}}</h2>
                                             <p class="invo-addr-1">
-                                                Theme Vessel <br />
-                                                info@themevessel.com <br />
-                                                21-12 Green Street, Meherpur, Bangladesh <br />
+                                                {{$order_details->email}} <br />
+                                                {{$order_details->division_id}}, {{$order_details->address_line2}}<br />
+                                                {{$division->name}}, {{$district->name}}, {{$order_details->zipCode}}<br />
+                                                {{$order_details->country_name}} <br />
+                                                {{$order_details->phone}}
                                             </p>
                                         </div>
                                     </div>
@@ -84,81 +86,57 @@
                                         <thead class="bg-active">
                                             <tr class="tr">
                                                 <th>No.</th>
-                                                <th class="pl0 text-start">Item Description</th>
+                                                <th class="pl0 text-start">Product Name</th>
                                                 <th class="text-center">Price</th>
                                                 <th class="text-center">Quantity</th>
                                                 <th class="text-end">Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="tr">
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>01</span>
-                                                    </div>
-                                                </td>
-                                                <td class="pl0">Businesscard Design</td>
-                                                <td class="text-center">$300</td>
-                                                <td class="text-center">2</td>
-                                                <td class="text-end">$600.00</td>
-                                            </tr>
+                                            <?php $i = 1; ?>
+                                            @foreach(App\Models\Cart::where('order_id',$order_details->id)->get() as $orderDetails)
+
                                             <tr class="bg-grea">
                                                 <td>
                                                     <div class="item-desc-1">
-                                                        <span>02</span>
+                                                        <span><?php echo $i; ?></span>
 
                                                     </div>
                                                 </td>
-                                                <td class="pl0">Fruit Flayer Design</td>
-                                                <td class="text-center">$400</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-end">$60.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>03</span>
-                                                    </div>
+                                                <td class="pl0">{{$orderDetails->product->title}}</td>
+                                                <td class="text-center">
+                                                    @if(!is_null($orderDetails->product->offer_price))
+                                                    {{$orderDetails->product->offer_price}} BDT
+                                                    @else
+                                                    {{$orderDetails->product->regular_price}} BDT
+                                                    @endif
                                                 </td>
-                                                <td class="pl0">Application Interface Design</td>
-                                                <td class="text-center">$240</td>
-                                                <td class="text-center">3</td>
-                                                <td class="text-end">$640.00</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>04</span>
-                                                    </div>
+                                                <td class="text-center">{{$orderDetails->quantity}} Pcs </td>
+                                                <td class="text-end">
+                                                    @if(!is_null($orderDetails->product->offer_price))
+                                                    {{$orderDetails->quantity * $orderDetails->product->offer_price}} BDT
+                                                    @else
+                                                    {{$orderDetails->quantity * $orderDetails->product->regular_price}} BDT
+                                                    @endif
                                                 </td>
-                                                <td class="pl0">Theme Development</td>
-                                                <td class="text-center">$720</td>
-                                                <td class="text-center">4</td>
-                                                <td class="text-end">$640.00</td>
                                             </tr>
-                                            <tr class="tr2">
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="text-center">SubTotal</td>
-                                                <td class="text-end">$710.99</td>
-                                            </tr>
-                                            <tr class="tr2">
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="text-center">Tax</td>
-                                                <td class="text-end">$85.99</td>
-                                            </tr>
-                                            <tr class="tr2">
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="text-center f-w-600 active-color">Grand Total</td>
-                                                <td class="f-w-600 text-end active-color">$795.99</td>
-                                            </tr>
+                                            <?php $i++; ?>
+                                            @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <tr class="tr2">
+                                                <td class="text-end" colspan="4">SubTotal</td>
+                                                <td class="text-end">{{$order_details->total_amount}} BDT</td>
+                                            </tr>
+                                            <tr class="tr2">
+                                                <td class="text-end" colspan="4">Tax</td>
+                                                <td class="text-end">00 BDT</td>
+                                            </tr>
+                                            <tr class="tr2">
+                                                <td class="text-end" colspan="4">Grand Total</td>
+                                                <td class="f-w-600 text-end active-color">{{$order_details->total_amount}} BDT</td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -200,6 +178,9 @@
                             </a>
                             <a id="invoice_download_btn" class="btn btn-lg btn-download btn-theme">
                                 <i class="fa fa-download"></i> Download Invoice
+                            </a>
+                            <a id="" href="{{route('homepage')}}" class="btn btn-lg btn-danger">
+                                <i class="fa fa-exit"></i> Back to home
                             </a>
                         </div>
                     </div>
